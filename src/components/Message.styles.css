@@ -1,0 +1,10 @@
+.message {
+    color: darkgreen;
+    font-size: 3em;
+}
+
+.header {
+    font-weight: 200;
+    font-size: 2em;
+    color:#282c34;
+}
