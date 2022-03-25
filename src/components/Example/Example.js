@@ -24,11 +24,14 @@ export class Counter extends React.Component {
     state = {
         count: 0,
     };
+
+    handleClick = () => this.setState({count: this.state.count + 1});
+
     render() {
         return (
             <div>
                 <h4>{this.state.count}</h4>
-                <button onClick={() => this.setState({count: this.state.count + 1})}>Click!</button>
+                <button onClick={this.handleClick}>Click!</button>
             </div>
         );
     }
