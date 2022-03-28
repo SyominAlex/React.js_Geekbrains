@@ -67,6 +67,7 @@ export class Counter extends React.Component {
         this.state = {
             count: 0,
             name: "Alex",
+            showChild: false,
         }; // равносильно записи выше из class field syntax
     }
 
@@ -75,6 +76,11 @@ export class Counter extends React.Component {
         повесить слушателя на body или состояние подключения к сети,
         когда компонент появляется в ответ на нажатие кнопки, например - такие сайд-эффекты */
         console.log('component did mount');
+        this.interval = setInterval(() => {
+            this.setState((prevState) => ({
+                count: prevState.count + 1,
+            }));
+        }, 1000);
     }
 
     // после componentDidMount возможен forceUpdate - никогда не надо пользоваться им = что-то делаете не так! "последняя заплатка"
@@ -85,9 +91,10 @@ export class Counter extends React.Component {
         console.log('component did update', prevProps, prevState);
     }
 
-    // стадия размонтирования
+    // стадия размонтирования, здесь нужно чистить таймеры, setInterval и др.
     componentWillUnmount() {
         console.log('component will unmount'); // это не увидим, т.к. возникает, когда компонент был, но пропал
+        clearInterval(this.interval);
     }
 
     // искусственно создали race condition - состояние гонки, когда есть 2 функции, которые изменяют одно и то же поле стейта
@@ -108,14 +115,21 @@ export class Counter extends React.Component {
         }); // setState асинхронный (но не возвращает промис)! после выполнения setState происходит обновление, а потом render, поэтому:
     };
 
+    toggleChild = () => {
+        this.setState((prevState) => ({
+            showChild: !prevState.showChild,
+        }));
+    };
+
     render() {
         // console.log(this.state.name);
         console.log('render');
         return (
             <div>
                 <h4>{this.state.count}</h4>
-                <button onClick={this.increase}>Click!</button>
-                <Child />
+                {/*<button onClick={this.increase}>Click!</button>*/}
+                <button onClick={this.toggleChild}>Click!</button>
+                {this.state.showChild && <Child />} {/*условный рендер*/}
             </div>
         );
     }
@@ -124,4 +138,5 @@ export class Counter extends React.Component {
 // условный рендер
 // const a = true && 4; // 4 приведение операндов к FALSE или последний (И спотыкается на ЛЖИ, ИЛИ спотыкается на ИСТИНЕ)
 // const a = 0 && 4; // 0
-
+// const a1 = 4 && true; // true
+// const b1 = 4 && 0; // 0
