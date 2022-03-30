@@ -1,8 +1,10 @@
 import {useState} from "react";
 
 export const Form = ({ onSubmit }) => {
+
     // контролируемые формы создаются с использованием стейта, неконтролируемые формы - с использованием рефов
     // контролируемые - когда мы полностью контролируем процесс и храним данные в компоненте в стейте
+
     const [value, setValue] = useState('');
 
     const handleSubmit = (e) => {
@@ -19,6 +21,7 @@ export const Form = ({ onSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
             <input value={value} onChange={handleChange} type="text"/>
+            {/*<textarea value={value} onChange={handleChange}/>*/}
             <input type="submit"/>
         </form>
     );

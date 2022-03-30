@@ -68,8 +68,6 @@ export const Counter = ({randomNumber}) => {
     );
 };
 
-
-
 /* Пример на классовом компоненте */
 
 // export class Child extends React.Component {
