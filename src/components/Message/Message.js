@@ -1,9 +1,10 @@
 import "./Message.styles.css";
 
-export const Message = ({ name, age, bold }) => {
+export const Message = ({ author, text }) => {
     return (
-        <h1 className={"message" + (!bold ? " header" : "")}>
-            I am a message: {name}, {age} years old ;)
-        </h1>
+        <div className="message">
+            <span>{author}: </span>
+            <span>{text}</span>
+        </div>
     );
 };
