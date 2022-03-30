@@ -1,6 +1,7 @@
 import "./App.css";
 import React, {useState} from "react";
 import { Message } from "./components/Message/Message";
+import { Form } from "./components/Form/Form";
 // import { Counter } from "./components/Example/Example";
 
 const name = "Syomin Alex";
@@ -40,6 +41,7 @@ function App() {
                     <Message text={msg.text} author={msg.author} />
                 ))} {/*Warning: Each child in a list should have a unique "key" prop. Check the render method of `App`*/}
                 <button onClick={addMessage}>Add message</button>
+            <Form />
             </div>
             <div>2nd div</div>
         </React.Fragment>
