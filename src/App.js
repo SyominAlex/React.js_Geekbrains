@@ -4,7 +4,7 @@ import { Message } from "./components/Message/Message";
 import { Form } from "./components/Form/Form";
 // import { Counter } from "./components/Example/Example";
 
-const name = "Syomin Alex";
+const name = "me";
 
 const msgs = [
     {
@@ -14,6 +14,10 @@ const msgs = [
     {
         author: name,
         text: "text2",
+    },
+    {
+        author: "robot",
+        text: "message from robot",
     },
 ];
 
@@ -25,13 +29,12 @@ function App() {
     //     setRand(Math.random());
     // };
 
-    const addMessage = () => {
+    const addMessage = (newText) => {
         // messages.push() - недопустимо так мутировать стейт во избежание сюрпризов
-        setMessages([...messages, { text: "new message", author: "author" }]);
+        setMessages([...messages, { text: newText, author: name }]);
     }
 
     return (
-        <React.Fragment key={123}>
             <div className="App">
                 {/*<Counter randomNumber={rand} />
                 <button onClick={updateRand}>Update random</button>*/}
@@ -40,11 +43,9 @@ function App() {
                 {messages.map((msg) => (
                     <Message text={msg.text} author={msg.author} />
                 ))} {/*Warning: Each child in a list should have a unique "key" prop. Check the render method of `App`*/}
-                <button onClick={addMessage}>Add message</button>
-            <Form />
+                {/*<button onClick={addMessage}>Add message</button>*/}
+            <Form onSubmit={addMessage} />
             </div>
-            <div>2nd div</div>
-        </React.Fragment>
     );
 }
 
