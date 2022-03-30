@@ -1,4 +1,5 @@
 import {useState} from "react";
+import "./Form.styles.css";
 
 export const Form = ({ onSubmit }) => {
 
@@ -20,9 +21,8 @@ export const Form = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input value={value} onChange={handleChange} type="text"/>
-            {/*<textarea value={value} onChange={handleChange}/>*/}
-            <input type="submit"/>
+            <input value={value} onChange={handleChange} type="text" required autoFocus />
+            <input type="submit" />
         </form>
     );
 }
