@@ -1,9 +1,9 @@
 input {
-    color: #282c34;
+    background-color: #c9e1bc;
+    font-size: 1em;
+    margin-top: 10px;
 }
-input:required:invalid {
-    border: 1px solid red;
-}
+
 input:required:valid {
     border: 1px solid green;
 }

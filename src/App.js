@@ -6,10 +6,10 @@ import { AUTHORS } from "./utils/constants";
 
 function App() {
 
-    const [messages, setMessages] = useState([]);
+    const [messageList, setMessageList] = useState([]);
 
     const addMessage = (newMsg) => {
-        setMessages([...messages, newMsg]);
+        setMessageList([...messageList, newMsg]);
     }
 
     const sendMessage = (text) => {
@@ -21,7 +21,7 @@ function App() {
 
     useEffect(() => {
         let timeout;
-        if (messages[messages.length - 1]?.author === AUTHORS.human) {
+        if (messageList[messageList.length - 1]?.author === AUTHORS.human) {
             timeout = setTimeout(() => {
                 addMessage({ author: AUTHORS.robot, text: "Hello, friend!" });
             }, 1500);
@@ -30,11 +30,11 @@ function App() {
         return () => {
             clearTimeout(timeout);
         };
-    }, [messages]);
+    }, [messageList]);
 
     return (
             <div className="App">
-                <MessageList messages={messages} />
+                <MessageList messageList={messageList} />
                 <Form onSubmit={sendMessage} />
             </div>
     );
