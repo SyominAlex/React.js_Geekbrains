@@ -1,0 +1,9 @@
+input {
+    background-color: #c9e1bc;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+input:required:valid {
+    border: 1px solid green;
+}
