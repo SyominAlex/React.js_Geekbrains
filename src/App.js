@@ -7,7 +7,6 @@ import { AUTHORS } from "./utils/constants";
 function App() {
 
     const [messageList, setMessageList] = useState([]);
-    const [flag, setFlag] = useState(false);
 
     const addMessage = (newMsg) => {
         setMessageList([...messageList, newMsg]);
@@ -17,6 +16,7 @@ function App() {
         addMessage({
             author: AUTHORS.human,
             text,
+            id: `msg-${Date.now()}`,
         });
     };
 
@@ -24,7 +24,11 @@ function App() {
         let timeout;
         if (messageList[messageList.length - 1]?.author === AUTHORS.human) {
             timeout = setTimeout(() => {
-                addMessage({ author: AUTHORS.robot, text: "Hello, friend!" });
+                addMessage({
+                    author: AUTHORS.robot,
+                    text: "Hello, friend!",
+                    id: `msg-${Date.now()}`,
+                });
             }, 1500);
         }
 
@@ -36,16 +40,7 @@ function App() {
     return (
             <div className="App">
                 <MessageList messageList={messageList} />
-                {flag ? (
-                    <div>
-                        <Form onSubmit={sendMessage} />
-                    </div>
-                ) : (
-                    <div>
-                        <Form onSubmit={sendMessage} />
-                    </div>
-                )} {/* если меняем корневой элемент поддерева, учитываем, что всё поддерево будет размонтировано, а если не меняем - по факту в VirtualDOM ничего не меняется */}
-                <button onClick={() => setFlag(!flag)}>click</button>
+                <Form onSubmit={sendMessage} />
             </div>
     );
 }
