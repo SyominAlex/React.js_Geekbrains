@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "@mui/material";
 import "./Form.styles.css";
 
 export const Form = ({ onSubmit }) => {
@@ -22,7 +23,8 @@ export const Form = ({ onSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
             <input value={value} onChange={handleChange} type="text" required autoFocus />
-            <input type="submit" />
+            {/*<input type="submit" />*/}
+            <Button>Submit</Button>
         </form>
     );
 }
