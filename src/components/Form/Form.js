@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState, useEffect } from "react";
 import "./Form.styles.css";
 
 export const Form = ({ onSubmit }) => {
@@ -18,6 +18,14 @@ export const Form = ({ onSubmit }) => {
     const handleChange = (e) => {
         setValue(e.target.value);
     }
+
+    useEffect(() => {
+        console.log("did mount");
+
+        return () => {
+            console.log("will unmount");
+        };
+    });
 
     return (
         <form onSubmit={handleSubmit}>

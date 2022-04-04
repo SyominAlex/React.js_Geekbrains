@@ -7,6 +7,7 @@ import { AUTHORS } from "./utils/constants";
 function App() {
 
     const [messageList, setMessageList] = useState([]);
+    const [flag, setFlag] = useState(false);
 
     const addMessage = (newMsg) => {
         setMessageList([...messageList, newMsg]);
@@ -35,7 +36,16 @@ function App() {
     return (
             <div className="App">
                 <MessageList messageList={messageList} />
-                <Form onSubmit={sendMessage} />
+                {flag ? (
+                    <div>
+                        <Form onSubmit={sendMessage} />
+                    </div>
+                ) : (
+                    <div>
+                        <Form onSubmit={sendMessage} />
+                    </div>
+                )} {/* если меняем корневой элемент поддерева, учитываем, что всё поддерево будет размонтировано, а если не меняем - по факту в VirtualDOM ничего не меняется */}
+                <button onClick={() => setFlag(!flag)}>click</button>
             </div>
     );
 }
