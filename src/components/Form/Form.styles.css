@@ -1,3 +1,13 @@
+.Button.css-sghohy-MuiButtonBase-root-MuiButton-root {
+    background-color: green;
+    margin: 30px 0;
+}
+
+.Button.css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: yellowgreen;
+}
+
+/*
 input {
     background-color: #ffffd6;
     font-size: 1em;
@@ -6,4 +16,4 @@ input {
 
 input:required:valid {
     border: 1px solid green;
-}
+}*/

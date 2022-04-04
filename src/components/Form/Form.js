@@ -24,8 +24,16 @@ export const Form = ({ onSubmit }) => {
         <form onSubmit={handleSubmit}>
             {/*<input value={value} onChange={handleChange} type="text" required autoFocus />*/}
             {/*<input type="submit" />*/}
-            <TextField value={value} onChange={handleChange} />
-            <Button variant={"contained"} type="ssubmit">Submit</Button>
+            <TextField
+                style={{ margin: '20px' }}
+                id="outlined-basic"
+                label="Сообщение"
+                variant="outlined"
+                value={value}
+                onChange={handleChange}
+            />
+            {/*<Button sx={{ color: "green" }}  variant={"contained"} type="submit">Submit</Button>*/}
+            <Button className={"Button"}  variant={"contained"} type="submit">Отправить</Button>
         </form>
     );
 }
