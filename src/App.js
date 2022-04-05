@@ -3,6 +3,7 @@ import React, {useEffect, useRef, useState} from "react";
 import { MessageList } from "./components/MessageList/MessageList";
 import { Form } from "./components/Form/Form";
 import { AUTHORS } from "./utils/constants";
+import VirtualizedList from "./components/ChatList/ChatList";
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
 
     return (
             <div className="App">
+                <VirtualizedList />
                 <MessageList messageList={messageList} />
                 <Form onSubmit={sendMessage} />
             </div>

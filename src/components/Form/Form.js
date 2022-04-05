@@ -38,7 +38,7 @@ export const Form = ({ onSubmit }) => {
             {/*<input value={value} onChange={handleChange} type="text" ref={inputRef} required />*/}
             {/*<input type="submit" />*/}
             <TextField
-                style={{ margin: '20px' }}
+                style={{ margin: '20px', width: "50%" }}
                 id="outlined-basic"
                 label="Сообщение"
                 variant="outlined"
