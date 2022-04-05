@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { MessageList } from "./components/MessageList/MessageList";
 import { Form } from "./components/Form/Form";
 import { AUTHORS } from "./utils/constants";
@@ -7,6 +7,8 @@ import { AUTHORS } from "./utils/constants";
 function App() {
 
     const [messageList, setMessageList] = useState([]);
+
+    const timeout = useRef();
 
     const addMessage = (newMsg) => {
         setMessageList([...messageList, newMsg]);
@@ -21,9 +23,8 @@ function App() {
     };
 
     useEffect(() => {
-        let timeout;
         if (messageList[messageList.length - 1]?.author === AUTHORS.human) {
-            timeout = setTimeout(() => {
+            timeout.current = setTimeout(() => {
                 addMessage({
                     author: AUTHORS.robot,
                     text: "Hello, friend!",
@@ -33,7 +34,7 @@ function App() {
         }
 
         return () => {
-            clearTimeout(timeout);
+            clearTimeout(timeout.current);
         };
     }, [messageList]);
 
