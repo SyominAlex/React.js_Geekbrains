@@ -35,16 +35,17 @@ export const Form = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input value={value} onChange={handleChange} type="text" ref={inputRef} required />
+            {/*<input value={value} onChange={handleChange} type="text" ref={inputRef} required />*/}
             {/*<input type="submit" />*/}
-            {/*<TextField
+            <TextField
                 style={{ margin: '20px' }}
                 id="outlined-basic"
                 label="Сообщение"
                 variant="outlined"
                 value={value}
                 onChange={handleChange}
-            />*/}
+                inputRef={inputRef}
+            />
             {/*<Button sx={{ color: "green" }}  variant={"contained"} type="submit">Submit</Button>*/}
             <Button className={"Button"}  variant={"contained"} type="submit">Отправить</Button>
         </form>
