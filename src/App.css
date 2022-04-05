@@ -2,12 +2,3 @@
   text-align: center;
   display: flex;
 }
-
-#messages {
-  flex-grow: 1;
-  min-width: auto;
-}
-
-a {
-  text-decoration: none;
-}
