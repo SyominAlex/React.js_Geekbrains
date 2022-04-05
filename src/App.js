@@ -2,14 +2,14 @@ import "./App.css";
 import React, {useEffect, useRef, useState} from "react";
 import { MessageList } from "./components/MessageList/MessageList";
 import { Form } from "./components/Form/Form";
-import { AUTHORS } from "./utils/constants";
-import VirtualizedList from "./components/ChatList/ChatList";
+import {AUTHORS, CHATS} from "./utils/constants";
+import {ChatList} from "./components/ChatList/ChatList";
 
 function App() {
 
     const [messageList, setMessageList] = useState([]);
 
-    const timeout = useRef();
+    const timeout = useRef(0);
 
     const addMessage = (newMsg) => {
         setMessageList([...messageList, newMsg]);
@@ -41,9 +41,11 @@ function App() {
 
     return (
             <div className="App">
-                <VirtualizedList />
-                <MessageList messageList={messageList} />
-                <Form onSubmit={sendMessage} />
+                <ChatList chatList={CHATS} />
+                <div>
+                    <MessageList messageList={messageList} />
+                    <Form onSubmit={sendMessage} />
+                </div>
             </div>
     );
 }
