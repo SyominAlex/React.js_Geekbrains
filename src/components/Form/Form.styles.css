@@ -1,9 +1,8 @@
-input {
-    background-color: #c9e1bc;
-    font-size: 1em;
-    margin-top: 10px;
+.Button.css-sghohy-MuiButtonBase-root-MuiButton-root {
+    background-color: green;
+    margin: 30px 0;
 }
 
-input:required:valid {
-    border: 1px solid green;
+.Button.css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: yellowgreen;
 }
