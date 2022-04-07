@@ -1,10 +1,6 @@
 // import React from "react";
 // import {logDOM} from "@testing-library/react";
-// import { useEffect, useState } from "react";
-
-import {useEffect, useRef, useState} from "react";
-// import { Button, TextField } from "@mui/material";
-// import "./Form.styles.css";
+import { useEffect, useState } from "react";
 
 /* Пример на функциональных компонентах
 * - нет никаких методов, которые можно вызывать, как у классовых компонентов
@@ -16,62 +12,62 @@ import {useEffect, useRef, useState} from "react";
 *   -- все хуки начинаются со слова use..., стандартных более 20, можно написать свой кастомный хук
 *   --  SokolAlexander: название со слова use - это, если что, просто хороший тон) никакой ошибки не будет, если вы назовете по другому, просто возникнут сложности в понимании (в отличие от других правил - там прям ошибки посыпятся)) */
 
-// export const Counter = ({randomNumber}) => {
-//     // let count = 0;
-//     const [count, setCount] = useState(0);
-//     // const countState = useState(0);
-//     // const count = countState[0];
-//     // const setCount = countState[1];
-//
-//     // хук useEffect() - функция, которая принимает аргументами коллбэк и массив зависимостей, от чего зависит момент ее исполнения
-//     // если есть пустой массив зависимостей, вызовется только 1 раз на монтировании
-//     useEffect(() => {
-//         console.log('like did mount');
-//     }, []);
-//
-//     // если нет массива зависимостей - вызовется на монтировании и на каждом обновлении
-//     useEffect(() => {
-//         console.log('like did mount + did update (no dependencies array)');
-//         return () => { // возвращаемая из useEffect() с НЕпустым массивом зависимостей функция отрабатывает перед обновлением компонента
-//             console.log('like will unmount (no dependencies array)');
-//         }
-//     });
-//
-//     // если в массиве зависимостей что-то есть (например, count) - вызовется при монтировании компонента и при изменении любой переменной из массива зависимостей
-//     useEffect(() => {
-//         console.log('like did mount + count update');
-//     }, [count]);
-//
-//     useEffect(() => {
-//         console.log('like did mount + randomNumber update');
-//     }, [randomNumber]);
-//
-//     useEffect(() => {
-//         console.log('like did mount + count or randomNumber update');
-//     }, [count, randomNumber]);
-//
-//     /* Таким образом можно постоянно обновлять слушателя: не вешать каждый раз, а делать возврат useEffect() и ставить новый useEffect() */
-//     useEffect(() => {
-//         console.log('like did mount + count or randomNumber update [count, randomNumber]');
-//         return () => { // возвращаемая из useEffect() с НЕпустым массивом зависимостей функция отрабатывает перед обновлением компонента
-//             console.log('like will unmount [count, randomNumber]');
-//         }
-//     }, [count, randomNumber]);
-//
-//     useEffect(() => {
-//         return () => { // возвращаемая из useEffect() с пустым массивом зависимостей функция отрабатывает перед размонтированием компонента
-//             console.log('like will unmount');
-//         }
-//     }, []);
-//
-//     return (
-//         <div>
-//             <h4>{count}</h4>
-//             <button onClick={() => setCount(count + 1)}>Click!</button> {/*второго аргумента у setCount нет, тоже можно сделать (prevCount) => {prevCount + 1}*/}
-//             <div>{randomNumber}</div>
-//         </div>
-//     );
-// };
+export const Counter = ({randomNumber}) => {
+    // let count = 0;
+    const [count, setCount] = useState(0);
+    // const countState = useState(0);
+    // const count = countState[0];
+    // const setCount = countState[1];
+
+    // хук useEffect() - функция, которая принимает аргументами коллбэк и массив зависимостей, от чего зависит момент ее исполнения
+    // если есть пустой массив зависимостей, вызовется только 1 раз на монтировании
+    useEffect(() => {
+        console.log('like did mount');
+    }, []);
+
+    // если нет массива зависимостей - вызовется на монтировании и на каждом обновлении
+    useEffect(() => {
+        console.log('like did mount + did update (no dependencies array)');
+        return () => { // возвращаемая из useEffect() с НЕпустым массивом зависимостей функция отрабатывает перед обновлением компонента
+            console.log('like will unmount (no dependencies array)');
+        }
+    });
+
+    // если в массиве зависимостей что-то есть (например, count) - вызовется при монтировании компонента и при изменении любой переменной из массива зависимостей
+    useEffect(() => {
+        console.log('like did mount + count update');
+    }, [count]);
+
+    useEffect(() => {
+        console.log('like did mount + randomNumber update');
+    }, [randomNumber]);
+
+    useEffect(() => {
+        console.log('like did mount + count or randomNumber update');
+    }, [count, randomNumber]);
+
+    /* Таким образом можно постоянно обновлять слушателя: не вешать каждый раз, а делать возврат useEffect() и ставить новый useEffect() */
+    useEffect(() => {
+        console.log('like did mount + count or randomNumber update [count, randomNumber]');
+        return () => { // возвращаемая из useEffect() с НЕпустым массивом зависимостей функция отрабатывает перед обновлением компонента
+            console.log('like will unmount [count, randomNumber]');
+        }
+    }, [count, randomNumber]);
+
+    useEffect(() => {
+        return () => { // возвращаемая из useEffect() с пустым массивом зависимостей функция отрабатывает перед размонтированием компонента
+            console.log('like will unmount');
+        }
+    }, []);
+
+    return (
+        <div>
+            <h4>{count}</h4>
+            <button onClick={() => setCount(count + 1)}>Click!</button> {/*второго аргумента у setCount нет, тоже можно сделать (prevCount) => {prevCount + 1}*/}
+            <div>{randomNumber}</div>
+        </div>
+    );
+};
 
 /* Пример на классовом компоненте */
 
@@ -195,55 +191,4 @@ import {useEffect, useRef, useState} from "react";
 // const a1 = 4 && true; // true
 // const b1 = 4 && 0; // 0
 
-/* CHILDREN EXAMPLE */
-export const ExampleForm = ({ onSubmit, render }) => {
-
-    // контролируемые формы создаются с использованием стейта, неконтролируемые формы - с использованием рефов
-    // контролируемые - когда мы полностью контролируем процесс и храним данные в компоненте в стейте
-
-    const [value, setValue] = useState("");
-
-    // const inputRef = useRef(null);
-    const inputRef = useRef();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        onSubmit(value);
-        setValue(""); // очистка поля ввода после submit
-        inputRef.current?.focus(); // решил добавить автофокус на поле
-    }
-
-    const handleChange = (e) => {
-        setValue(e.target.value);
-    }
-
-    useEffect(() => {
-        console.log("did mount", inputRef);
-        inputRef.current?.focus();
-
-        return () => {
-            console.log("will unmount");
-        }
-    }, []);
-
-    /* в чилдрены можно передавать функцию handleChange и value объектом */
-    return (
-        <form onSubmit={handleSubmit}>
-            {render({ value, handleChange })}
-        </form>
-    );
-}
-
-// пример подстановки
-// const name = "value";
-//
-// const obj = {
-//     name: 1,
-//     // value: 2,
-//     [name]: 2,
-// };
-//
-// console.log(obj.name, obj[name]); // выведет 1 2, т.к. obj[name] === obj.value;
-// console.log(obj.name, obj.value); // аналогично вычисляется значение ключа
-
+/* CHILDREN */
