@@ -191,4 +191,4 @@ export const Counter = ({randomNumber}) => {
 // const a1 = 4 && true; // true
 // const b1 = 4 && 0; // 0
 
-/* CHILDREN */
+/* CHILDREN EXAMPLE */
