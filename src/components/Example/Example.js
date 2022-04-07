@@ -190,3 +190,5 @@ export const Counter = ({randomNumber}) => {
 // const a = 0 && 4; // 0
 // const a1 = 4 && true; // true
 // const b1 = 4 && 0; // 0
+
+/* CHILDREN */
