@@ -48,8 +48,10 @@ function App() {
                     <MessageList messageList={messageList} />
                     <Form onSubmit={sendMessage} />
                 </div>
-                <ExampleForm onSubmit={() => {}}>
-                    {({ value, handleChange }) => (
+                {/*паттерн render prop - вместо чилдренов используется рендер render={}*/}
+                <ExampleForm
+                    onSubmit={() => {}}
+                    render={({ value, handleChange }) => (
                     <TextField
                         style={{ margin: '20px' }}
                         id="outlined-basic"
@@ -59,15 +61,15 @@ function App() {
                         onChange={handleChange}
                         // inputRef={inputRef}
                     />
-                    )}
+                )}>
                 </ExampleForm>
                 {/* мы можем передать сюда любой текстовый input, для формы не важно какой, она будет эту логику применять,
                 какой бы мы инпут сюда ни передали, даже обычный html input, можем передавать начальные значения initialValues, массив или объект values,
                 для каждого инпута находилось бы свое value. Родительский компонент решает какие будут значения, он может проигнорировать какие-то из этих пропсов.
                  Такой подход применяется чаще всего в формах, например, набирающая популярность библиотека react final form или formic (вся логика на стороне этой библиотеки). */}
-                <ExampleForm onSubmit={() => {}}>
-                    {/*паттерн render prop - вместо чилдренов используется рендер render={}*/}
-                    {({ value, handleChange }) => (
+                <ExampleForm
+                    onSubmit={() => {}}
+                    render={({ value, handleChange }) => (
                         <input
                             style={{ margin: '20px' }}
                             id="outlined-basic"
@@ -75,6 +77,7 @@ function App() {
                             onChange={handleChange}
                         />
                     )}
+                >
                 </ExampleForm>
             </div>
     );
