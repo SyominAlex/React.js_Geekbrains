@@ -196,7 +196,7 @@ import {useEffect, useRef, useState} from "react";
 // const b1 = 4 && 0; // 0
 
 /* CHILDREN EXAMPLE */
-export const ExampleForm = ({ onSubmit, children }) => {
+export const ExampleForm = ({ onSubmit, render }) => {
 
     // контролируемые формы создаются с использованием стейта, неконтролируемые формы - с использованием рефов
     // контролируемые - когда мы полностью контролируем процесс и храним данные в компоненте в стейте
@@ -227,9 +227,10 @@ export const ExampleForm = ({ onSubmit, children }) => {
         }
     }, []);
 
+    /* в чилдрены можно передавать функцию handleChange и value объектом */
     return (
         <form onSubmit={handleSubmit}>
-            {children(value, handleChange) /* в чилдрены можно передавать функцию handleChange и value объектом */}
+            {render({ value, handleChange })}
         </form>
     );
 }
