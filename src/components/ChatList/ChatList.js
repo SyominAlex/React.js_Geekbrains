@@ -6,7 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 export function ChatList({ chatList }) {
     return (
-            <List sx={{ maxWidth: 200 }}>
+            <List sx={{ maxWidth: 200, flexGrow: 1 }}>
                 {chatList.map((chatList) => (
                     <ListItem disablePadding>
                         <ListItemButton>
