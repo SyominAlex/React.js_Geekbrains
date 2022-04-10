@@ -1,55 +1,50 @@
-import {useEffect, useRef, useState} from "react";
-import {AUTHORS} from "../../utils/constants";
+import React, {useEffect, useRef, useState} from "react";
+import {AUTHORS, CHATS} from "../../utils/constants";
+import {ChatList} from "../../components/ChatList/ChatList";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {Form} from "../../components/Form/Form";
-import {useParams, Navigate/*, useNavigate*/} from "react-router-dom";
-import * as React from "react";
 
-export function Chat({messages, addMessage}) {
+export function Chat() {
 
-    const {id} = useParams();
-
-    // const navigate = useNavigate(); // передать маршрут роутеру - более декларативный подход
-    // console.log(navigate);
+    const [messageList, setMessageList] = useState([]);
 
     const timeout = useRef(0);
 
+    const addMessage = (newMsg) => {
+        setMessageList([...messageList, newMsg]);
+    }
+
     const sendMessage = (text) => {
-        addMessage(
-            {
-                author: AUTHORS.human,
-                text,
-                id: `msg-${Date.now()}`,
-            },
-            id);
+        addMessage({
+            author: AUTHORS.human,
+            text,
+            id: `msg-${Date.now()}`,
+        });
     };
 
     useEffect(() => {
-        // не добавлялись сообщения от робота, т.к. шла проверка без учета чатика
-        const lastMessage = messages[id]?.[messages[id]?.length - 1];
-        if (lastMessage?.author === AUTHORS.human) {
+        if (messageList[messageList.length - 1]?.author === AUTHORS.human) {
             timeout.current = setTimeout(() => {
                 addMessage({
                     author: AUTHORS.robot,
                     text: "Hello, friend!",
                     id: `msg-${Date.now()}`,
-                }, id);
+                });
             }, 1500);
         }
 
         return () => {
             clearTimeout(timeout.current);
         };
-    }, [messages]);
-
-    if (!messages[id]) {
-        return <Navigate to="chat" replace/>
-    }
+    }, [messageList]);
 
     return (
-        <div id="messages">
-            <MessageList messages={messages[id]}/>
-            <Form onSubmit={sendMessage}/>
+        <div className="App">
+            <ChatList chatList={CHATS} />
+            <div id="messages">
+                <MessageList messageList={messageList} />
+                <Form onSubmit={sendMessage} />
+            </div>
         </div>
     );
 }
