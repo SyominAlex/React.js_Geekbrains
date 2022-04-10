@@ -6,11 +6,11 @@ import ListItemText from '@mui/material/ListItemText';
 
 export function ChatList({ chatList }) {
     return (
-            <List sx={{ maxWidth: 200, flexGrow: 1 }}>
+            <List sx={{ maxWidth: 200, flexGrow: 1 }} >
                 {chatList.map((chatList) => (
-                    <ListItem disablePadding>
+                    <ListItem disablePadding key={chatList.id.toString()} >
                         <ListItemButton>
-                            <ListItemText key={chatList.id} primary={chatList.name} />
+                            <ListItemText primary={chatList.name} />
                         </ListItemButton>
                     </ListItem>
                 ))}
