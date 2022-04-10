@@ -3,8 +3,12 @@ import {AUTHORS, CHATS} from "../../utils/constants";
 import {ChatList} from "../../components/ChatList/ChatList";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {Form} from "../../components/Form/Form";
+import {useParams} from "react-router-dom";
 
 export function Chat() {
+
+    const params = useParams();
+    console.log(params);
 
     const [messageList, setMessageList] = useState([]);
 
