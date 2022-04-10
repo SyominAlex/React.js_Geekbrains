@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import {BrowserRouter, Route, Routes, Link, NavLink} from "react-router-dom";
+import {BrowserRouter, Route, Routes, NavLink} from "react-router-dom";
 import { Chat } from "./screens/Chat/Chat";
 
 const Home = () => <h4>Home page</h4>;
@@ -19,6 +19,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/chat/:id" element={<Chat />} />
             </Routes>
         </BrowserRouter>
     );
