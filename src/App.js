@@ -1,52 +1,20 @@
 import "./App.css";
-import React, {useEffect, useRef, useState} from "react";
-import { MessageList } from "./components/MessageList/MessageList";
-import { Form } from "./components/Form/Form";
-import {AUTHORS, CHATS} from "./utils/constants";
-import {ChatList} from "./components/ChatList/ChatList";
+import React from "react";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { Chat } from "./screens/Chat/Chat";
+
+const Home = () => <h4>Home page</h4>;
 
 function App() {
-
-    const [messageList, setMessageList] = useState([]);
-
-    const timeout = useRef(0);
-
-    const addMessage = (newMsg) => {
-        setMessageList([...messageList, newMsg]);
-    }
-
-    const sendMessage = (text) => {
-        addMessage({
-            author: AUTHORS.human,
-            text,
-            id: `msg-${Date.now()}`,
-        });
-    };
-
-    useEffect(() => {
-        if (messageList[messageList.length - 1]?.author === AUTHORS.human) {
-            timeout.current = setTimeout(() => {
-                addMessage({
-                    author: AUTHORS.robot,
-                    text: "Hello, friend!",
-                    id: `msg-${Date.now()}`,
-                });
-            }, 1500);
-        }
-
-        return () => {
-            clearTimeout(timeout.current);
-        };
-    }, [messageList]);
-
     return (
-            <div className="App">
-                <ChatList chatList={CHATS} />
-                <div id="messages">
-                    <MessageList messageList={messageList} />
-                    <Form onSubmit={sendMessage} />
-                </div>
-            </div>
+        <BrowserRouter>
+            <Link to="/">Home</Link>
+            <Link to="/chat">Chat</Link>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/chat" element={<Chat />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
