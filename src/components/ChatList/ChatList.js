@@ -12,7 +12,7 @@ export const ChatList = ({ chatList }) => (
             <ListItem disablePadding key={chatList.id.toString()} >
                 <ListItemButton>
                     <ListItemText primary={
-                        <Link to={`/chat/${chatList.id}`}>
+                        <Link to={`/chat/${chatList.id}`} >
                             {chatList.name}
                         </Link>
                     } />
