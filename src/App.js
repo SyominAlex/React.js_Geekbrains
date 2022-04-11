@@ -18,8 +18,9 @@ function App() {
             </ul>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/chat" element={<Chat />} />
-                <Route path="/chat/:id" element={<Chat />} />
+                <Route path="/chat" element={<Chat />}>
+                    <Route path=":id" element={<Chat />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     );

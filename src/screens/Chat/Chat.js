@@ -7,8 +7,7 @@ import {useParams} from "react-router-dom";
 
 export function Chat() {
 
-    const params = useParams();
-    console.log(params);
+    const { id } = useParams();
 
     const [messageList, setMessageList] = useState([]);
 
@@ -45,10 +44,10 @@ export function Chat() {
     return (
         <div className="App">
             <ChatList chatList={CHATS} />
-            <div id="messages">
-                <MessageList messageList={messageList} />
-                <Form onSubmit={sendMessage} />
-            </div>
+            {(id && <div id="messages">
+                <MessageList messageList={messageList}/>
+                <Form onSubmit={sendMessage}/>
+            </div>)}
         </div>
     );
 }
