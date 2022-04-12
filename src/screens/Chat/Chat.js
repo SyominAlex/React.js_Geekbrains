@@ -1,13 +1,13 @@
 import {useEffect, useRef, useState} from "react";
 import {AUTHORS, CHATS} from "../../utils/constants";
-import {ChatList} from "../../components/ChatList/ChatList";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {Form} from "../../components/Form/Form";
 import {useParams} from "react-router-dom";
+import * as React from "react";
 
 export function Chat() {
 
-    const { id } = useParams();
+    const {id} = useParams();
 
     const [messageList, setMessageList] = useState([]);
 
@@ -42,12 +42,9 @@ export function Chat() {
     }, [messageList]);
 
     return (
-        <div className="App">
-            <ChatList chatList={CHATS} />
-            {(id && <div id="messages">
-                <MessageList messageList={messageList}/>
-                <Form onSubmit={sendMessage}/>
-            </div>)}
+        <div id="messages">
+            <MessageList messageList={messageList}/>
+            <Form onSubmit={sendMessage}/>
         </div>
     );
 }
