@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import {AUTHORS, CHATS} from "../../utils/constants";
+import {AUTHORS, CHATS, initMessages} from "../../utils/constants";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {Form} from "../../components/Form/Form";
 import {useParams} from "react-router-dom";
@@ -7,14 +7,15 @@ import * as React from "react";
 
 export function Chat() {
 
-    const {id} = useParams();
+    const { id } = useParams();
 
-    const [messageList, setMessageList] = useState([]);
+    const [messageList, setMessageList] = useState(initMessages);
 
     const timeout = useRef(0);
 
     const addMessage = (newMsg) => {
-        setMessageList([...messageList, newMsg]);
+        setMessageList({ ...messageList, [id]: [...messageList[id], newMsg] });
+        console.log(setMessageList({ ...messageList, [id]: [...messageList[id], newMsg] }));
     }
 
     const sendMessage = (text) => {
@@ -43,7 +44,7 @@ export function Chat() {
 
     return (
         <div id="messages">
-            <MessageList messageList={messageList}/>
+            <MessageList messageList={messageList[id]}/>
             <Form onSubmit={sendMessage}/>
         </div>
     );
