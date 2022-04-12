@@ -24,6 +24,7 @@ function App() {
                     <Route path="/chat" element={<ChatList chatList={CHATS} />}>
                         <Route path=":id" element={<Chat />} />
                     </Route>
+                    <Route path="*" element={<h4>404</h4>} />
                 </Routes>
             </div>
         </BrowserRouter>
