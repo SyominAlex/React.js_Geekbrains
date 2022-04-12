@@ -15,7 +15,6 @@ export function Chat() {
 
     const addMessage = (newMsg) => {
         setMessageList({ ...messageList, [id]: [...messageList[id], newMsg] });
-        console.log(setMessageList({ ...messageList, [id]: [...messageList[id], newMsg] }));
     }
 
     const sendMessage = (text) => {
@@ -27,7 +26,9 @@ export function Chat() {
     };
 
     useEffect(() => {
-        if (messageList[messageList.length - 1]?.author === AUTHORS.human) {
+        // не добавлялись сообщения от робота, т.к. шла проверка без учета чатика
+        const lastMessage = messageList[id][messageList[id].length - 1];
+        if (lastMessage?.author === AUTHORS.human) {
             timeout.current = setTimeout(() => {
                 addMessage({
                     author: AUTHORS.robot,
