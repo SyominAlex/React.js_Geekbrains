@@ -234,3 +234,16 @@ export const ExampleForm = ({ onSubmit, render }) => {
         </form>
     );
 }
+
+// пример подстановки
+// const name = "value";
+//
+// const obj = {
+//     name: 1,
+//     // value: 2,
+//     [name]: 2,
+// };
+//
+// console.log(obj.name, obj[name]); // выведет 1 2, т.к. obj[name] === obj.value;
+// console.log(obj.name, obj.value); // аналогично вычисляется значение ключа
+
