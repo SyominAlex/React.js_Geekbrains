@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {AUTHORS, CHATS, initMessages} from "../../utils/constants";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {Form} from "../../components/Form/Form";
-import {useParams} from "react-router-dom";
+import {useParams, Navigate} from "react-router-dom";
 import * as React from "react";
 
 export function Chat() {
@@ -27,7 +27,7 @@ export function Chat() {
 
     useEffect(() => {
         // не добавлялись сообщения от робота, т.к. шла проверка без учета чатика
-        const lastMessage = messageList[id][messageList[id].length - 1];
+        const lastMessage = messageList[id]?.[messageList[id]?.length - 1];
         if (lastMessage?.author === AUTHORS.human) {
             timeout.current = setTimeout(() => {
                 addMessage({
@@ -42,6 +42,10 @@ export function Chat() {
             clearTimeout(timeout.current);
         };
     }, [messageList]);
+
+    if (!messageList[id]) {
+        return <Navigate to="chat" replace />
+    }
 
     return (
         <div id="messages">
