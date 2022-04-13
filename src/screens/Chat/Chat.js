@@ -1,8 +1,8 @@
 import {useEffect, useRef, useState} from "react";
-import {AUTHORS, CHATS, initMessages} from "../../utils/constants";
+import {AUTHORS, initMessages} from "../../utils/constants";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {Form} from "../../components/Form/Form";
-import {useParams, Navigate} from "react-router-dom";
+import {useParams, Navigate, useNavigate} from "react-router-dom";
 import * as React from "react";
 
 export function Chat() {
@@ -10,6 +10,9 @@ export function Chat() {
     const { id } = useParams();
 
     const [messageList, setMessageList] = useState(initMessages);
+
+    // const navigate = useNavigate(); // передать маршрут роутеру - более декларативный подход
+    // console.log(navigate);
 
     const timeout = useRef(0);
 
