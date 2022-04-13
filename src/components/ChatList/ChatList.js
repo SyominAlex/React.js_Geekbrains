@@ -14,7 +14,7 @@ export const ChatList = ({ chatList }) => {
         <>
             <List sx={{ maxWidth: 200, flexGrow: 1 }} >
                 {chatList.map((chatList) => (
-                    <ListItem disablePadding key={chatList.id.toString()} >
+                    <ListItem disablePadding key={chatList.id} >
                         <ListItemButton>
                             <ListItemText primary={
                                 <Link to={`/chat/${chatList.id}`} >
