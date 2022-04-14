@@ -3,7 +3,7 @@ export const AUTHORS = {
     robot: "Mr. Robot",
 };
 
-export const CHATS = [
+export const initialChats = [
     {
         id: "chat1",
         name: "Петя",
