@@ -6,8 +6,18 @@ import { Chat } from "./screens/Chat/Chat";
 import { ChatList } from "./components/ChatList/ChatList";
 import {initialChats} from "./utils/constants";
 
+const initMessages = initialChats.reduce((acc, chat) => {
+    acc[chat.id] = [];
+    return acc;
+}, {});
+
 function App() {
     const [chats, setChats] = useState(initialChats);
+    const [messages, setMessages] = useState(initMessages);
+
+    const addMessage = (newMsg, id) => {
+        setMessages({ ...messages, [id]: [...messages[id], newMsg] });
+    }
 
     return (
         <BrowserRouter>
@@ -22,8 +32,8 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/chat" element={<ChatList chatList={initialChats} />}>
-                        <Route path=":id" element={<Chat />} />
+                    <Route path="/chat" element={<ChatList chats={chats} />}>
+                        <Route path=":id" element={<Chat messages={messages} addMessage={addMessage} />} />
                     </Route>
                     <Route path="*" element={<h4>404</h4>} />
                 </Routes>
