@@ -5,8 +5,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Link, Outlet } from "react-router-dom";
 import {Form} from "../Form/Form";
+import {Button} from "@mui/material";
 
-export const ChatList = ({ chats, addChat }) => {
+export const ChatList = ({ chats, addChat, deleteChat }) => {
     const handleSubmit = (newChatName) => {
         const newChat = {
             name: newChatName,
@@ -32,10 +33,11 @@ export const ChatList = ({ chats, addChat }) => {
                                 </Link>
                             } />
                         </ListItemButton>
+                        <Button className={"Button"}  variant={"contained"} type="submit" onClick={() => deleteChat(chats.id)}>Удалить</Button>
                     </ListItem>
                 ))}
+                <Form onSubmit={handleSubmit} />
             </List>
-            <Form onSubmit={handleSubmit} />
             <Outlet />
         </>
     );
