@@ -24,6 +24,16 @@ function App() {
         setMessages((prevMessages) => ({ ...prevMessages, [newChat.id]: [] }));
     }
 
+    const deleteChat = (id) => {
+        setChats((prevChats) => prevChats.filter((chat) => chat.id !== id));
+        setMessages((prevMessages) => {
+            const newMessages = {...prevMessages};
+            delete newMessages[id];
+
+            return newMessages;
+        });
+    }
+
     return (
         <BrowserRouter>
             <ul>
@@ -37,7 +47,7 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/chat" element={<ChatList addChat={addChat} chats={chats} />}>
+                    <Route path="/chat" element={<ChatList chats={chats} addChat={addChat} deleteChat={deleteChat} />}>
                         <Route path=":id" element={<Chat messages={messages} addMessage={addMessage} />} />
                     </Route>
                     <Route path="*" element={<h4>404</h4>} />
