@@ -25,11 +25,3 @@ export const initialChats = [
         name: "Маша",
     },
 ];
-
-export const initMessages = {
-    chat1: [],
-    chat2: [],
-    chat3: [],
-    chat4: [],
-    chat5: [],
-};
