@@ -1,7 +1,7 @@
 import {Message} from "../Message/Message";
 
-export const MessageList = ({ messages }) => (
+export const MessageList = ({ messages, theme }) => (
     messages.map((msg) => (
-        <Message key={msg.id} text={msg.text} author={msg.author} />
+        <Message theme={theme} key={msg.id} text={msg.text} author={msg.author} />
     ))
 );

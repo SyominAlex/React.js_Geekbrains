@@ -5,6 +5,8 @@ import { Home } from "./screens/Home/Home";
 import { Chat } from "./screens/Chat/Chat";
 import { ChatList } from "./components/ChatList/ChatList";
 import {initialChats} from "./utils/constants";
+import { Button } from "@mui/material";
+
 
 const initMessages = initialChats.reduce((acc, chat) => {
     acc[chat.id] = [];
@@ -14,6 +16,7 @@ const initMessages = initialChats.reduce((acc, chat) => {
 function App() {
     const [chats, setChats] = useState(initialChats);
     const [messages, setMessages] = useState(initMessages);
+    const [theme, setTheme] = useState('dark');
 
     const addMessage = (newMsg, id) => {
         setMessages({ ...messages, [id]: [...messages[id], newMsg] });
@@ -38,6 +41,12 @@ function App() {
 
     return (
         <BrowserRouter>
+            {/*Для чего нужен context: эта кнопка и Message не связаны общим родителем, нужно передать данные в компонент Message*/}
+            <Button className={"Button"}  variant={"outlined"} onClick={() => setTheme(
+                (prevTheme) => (prevTheme === "dark" ? "light" : "dark")
+            )}>
+                Сменить тему
+            </Button>
             <ul>
                 <li>
                     <NavLink to="/" style={ navLinkStyle }>Home</NavLink>
@@ -50,7 +59,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/chat" element={<ChatList chats={chats} addChat={addChat} deleteChat={deleteChat} />}>
-                        <Route path=":id" element={<Chat messages={messages} addMessage={addMessage} />} />
+                        <Route path=":id" element={<Chat theme={theme} messages={messages} addMessage={addMessage} />} />
                     </Route>
                     <Route path="*" element={<h4>404</h4>} />
                 </Routes>

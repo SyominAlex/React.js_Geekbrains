@@ -1,11 +1,11 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef/*, useState*/} from "react";
 import {AUTHORS} from "../../utils/constants";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {Form} from "../../components/Form/Form";
 import {useParams, Navigate/*, useNavigate*/} from "react-router-dom";
 import * as React from "react";
 
-export function Chat({messages, addMessage}) {
+export function Chat({theme, messages, addMessage}) {
 
     const {id} = useParams();
 
@@ -48,7 +48,7 @@ export function Chat({messages, addMessage}) {
 
     return (
         <div id="messages">
-            <MessageList messages={messages[id]}/>
+            <MessageList theme={theme} messages={messages[id]}/>
             <Form onSubmit={sendMessage}/>
         </div>
     );
