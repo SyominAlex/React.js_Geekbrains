@@ -3,25 +3,25 @@ export const AUTHORS = {
     robot: "Mr. Robot",
 };
 
-export const CHATS = [
+export const initialChats = [
     {
-        id: 1,
-        name: "Вася",
-    },
-    {
-        id: 2,
-        name: "Ваня",
-    },
-    {
-        id: 3,
+        id: "chat1",
         name: "Петя",
     },
     {
-        id: 4,
+        id: "chat2",
+        name: "Ваня",
+    },
+    {
+        id: "chat3",
         name: "Саша",
     },
     {
-        id: 5,
+        id: "chat4",
+        name: "Вася",
+    },
+    {
+        id: "chat5",
         name: "Маша",
     },
 ];
