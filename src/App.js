@@ -17,12 +17,12 @@ function App() {
 
     const addMessage = (newMsg, id) => {
         setMessages({ ...messages, [id]: [...messages[id], newMsg] });
-    }
+    };
     
     const addChat = (newChat) => {
         setChats((prevChats) => [...prevChats, newChat]);
         setMessages((prevMessages) => ({ ...prevMessages, [newChat.id]: [] }));
-    }
+    };
 
     const deleteChat = (id) => {
         setChats((prevChats) => prevChats.filter((chat) => chat.id !== id));
@@ -34,14 +34,16 @@ function App() {
         });
     }
 
+    const navLinkStyle = ({ isActive }) => ({ color: isActive ? "green" : "blue" });
+
     return (
         <BrowserRouter>
             <ul>
                 <li>
-                    <NavLink to="/" style={ ({ isActive }) => ({ color: isActive ? "green" : "blue" }) }>Home</NavLink>
+                    <NavLink to="/" style={ navLinkStyle }>Home</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/chat" style={ ({ isActive }) => ({ color: isActive ? "green" : "blue" }) }>Chat</NavLink>
+                    <NavLink to="/chat" style={ navLinkStyle }>Chat</NavLink>
                 </li>
             </ul>
             <div className="App">
