@@ -12,7 +12,7 @@ a {
   text-decoration: none;
 }
 
-h3 {
+.profile {
   display: flex;
   flex-direction: column;
 }
