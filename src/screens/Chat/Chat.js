@@ -5,7 +5,7 @@ import {Form} from "../../components/Form/Form";
 import {useParams, Navigate/*, useNavigate*/} from "react-router-dom";
 import * as React from "react";
 
-export function Chat({theme, messages, addMessage}) {
+export function Chat({messages, addMessage}) {
 
     const {id} = useParams();
 
@@ -48,7 +48,7 @@ export function Chat({theme, messages, addMessage}) {
 
     return (
         <div id="messages">
-            <MessageList theme={theme} messages={messages[id]}/>
+            <MessageList messages={messages[id]}/>
             <Form onSubmit={sendMessage}/>
         </div>
     );
