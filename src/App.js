@@ -5,7 +5,7 @@ import { Home } from "./screens/Home/Home";
 import { Chat } from "./screens/Chat/Chat";
 import { ChatList } from "./components/ChatList/ChatList";
 import {initialChats} from "./utils/constants";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import {ThemeContext} from "./utils/ThemeContext";
 
 
@@ -38,23 +38,27 @@ function App() {
         });
     }
 
-    const navLinkStyle = ({ isActive }) => ({ color: isActive ? "green" : "blue" });
+    const toggleLinkStyle = ({ isActive }) => ({ color: isActive ? "green" : "blue" });
+
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+    };
 
     return (
-        <ThemeContext.Provider value={theme}>
+        <ThemeContext.Provider value={{ theme, changeTheme: toggleTheme }}>
             <BrowserRouter>
                 {/*Для чего нужен context: эта кнопка и Message не связаны общим родителем, нужно передать данные в компонент Message*/}
-                <Button className={"Button"}  variant={"outlined"} onClick={() => setTheme(
+                {/*<Button className={"Button"}  variant={"outlined"} onClick={() => setTheme(
                     (prevTheme) => (prevTheme === "dark" ? "light" : "dark")
                 )}>
                     Сменить тему
-                </Button>
+                </Button>*/}
                 <ul>
                     <li>
-                        <NavLink to="/" style={ navLinkStyle }>Home</NavLink>
+                        <NavLink to="/" style={ toggleLinkStyle }>Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/chat" style={ navLinkStyle }>Chat</NavLink>
+                        <NavLink to="/chat" style={ toggleLinkStyle }>Chat</NavLink>
                     </li>
                 </ul>
                 <div className="App">

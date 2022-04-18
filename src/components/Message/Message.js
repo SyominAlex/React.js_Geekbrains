@@ -4,7 +4,7 @@ import {useContext} from "react";
 import {ThemeContext} from "../../utils/ThemeContext";
 
 export const Message = ({ author, text }) => {
-    const theme = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
     console.log(theme);
 
     return (
