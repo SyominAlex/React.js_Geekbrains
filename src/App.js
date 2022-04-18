@@ -1,13 +1,13 @@
 import "./App.css";
 import React, {useState} from "react";
 import {BrowserRouter, Route, Routes, NavLink} from "react-router-dom";
+// import { Button } from "@mui/material";
+
 import { Home } from "./screens/Home/Home";
 import { Chat } from "./screens/Chat/Chat";
 import { ChatList } from "./components/ChatList/ChatList";
 import {initialChats} from "./utils/constants";
-// import { Button } from "@mui/material";
 import {ThemeContext} from "./utils/ThemeContext";
-
 
 const initMessages = initialChats.reduce((acc, chat) => {
     acc[chat.id] = [];
