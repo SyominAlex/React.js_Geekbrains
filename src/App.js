@@ -1,8 +1,9 @@
-import "./App.css";
 import React, {useState} from "react";
 import {BrowserRouter, Route, Routes, NavLink} from "react-router-dom";
 // import { Button } from "@mui/material";
 
+import "./App.css";
+import "./components/Example/Example";
 import { Home } from "./screens/Home/Home";
 import { Chat } from "./screens/Chat/Chat";
 import { ChatList } from "./components/ChatList/ChatList";
