@@ -9,6 +9,7 @@ import { Chat } from "./screens/Chat/Chat";
 import { ChatList } from "./components/ChatList/ChatList";
 import {initialChats} from "./utils/constants";
 import {ThemeContext} from "./utils/ThemeContext";
+import {Profile} from "./screens/Profile/Profile";
 
 const initMessages = initialChats.reduce((acc, chat) => {
     acc[chat.id] = [];
@@ -61,10 +62,14 @@ function App() {
                     <li>
                         <NavLink to="/chat" style={ toggleLinkStyle }>Chat</NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/profile" style={ toggleLinkStyle }>Profile</NavLink>
+                    </li>
                 </ul>
                 <div className="App">
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/profile" element={<Profile />} />
                         <Route path="/chat" element={<ChatList chats={chats} addChat={addChat} deleteChat={deleteChat} />}>
                             <Route path=":id" element={<Chat messages={messages} addMessage={addMessage} />} />
                         </Route>
