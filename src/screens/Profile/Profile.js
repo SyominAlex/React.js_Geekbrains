@@ -14,6 +14,10 @@ export const Profile = () => {
             <h3>This is Profile
                 {state.showName && <span>{state.name}</span>}
             <Button variant={"contained"} onClick={handleClick}>Change show name</Button>
+            <div>
+                <input type="checkbox" id="checkbox" onClick={handleClick}></input>
+                <label htmlFor="checkbox">change show name</label>
+            </div>
             </h3>
         </>
     );
