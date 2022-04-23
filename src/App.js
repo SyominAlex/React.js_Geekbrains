@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Provider } from "react-redux";
 import {BrowserRouter, Route, Routes, NavLink} from "react-router-dom";
 // import { Button } from "@mui/material";
 
@@ -10,6 +11,7 @@ import { ChatList } from "./components/ChatList/ChatList";
 import {initialChats} from "./utils/constants";
 import {ThemeContext} from "./utils/ThemeContext";
 import {Profile} from "./screens/Profile/Profile";
+import {store} from "./store";
 
 const initMessages = initialChats.reduce((acc, chat) => {
     acc[chat.id] = [];
@@ -47,37 +49,39 @@ function App() {
     };
 
     return (
-        <ThemeContext.Provider value={{ theme, changeTheme: toggleTheme }}>
-            <BrowserRouter>
-                {/*Для чего нужен context: эта кнопка и Message не связаны общим родителем, нужно передать данные в компонент Message*/}
-                {/*<Button className={"Button"}  variant={"outlined"} onClick={() => setTheme(
+        <Provider store={store}>
+            <ThemeContext.Provider value={{ theme, changeTheme: toggleTheme }}>
+                <BrowserRouter>
+                    {/*Для чего нужен context: эта кнопка и Message не связаны общим родителем, нужно передать данные в компонент Message*/}
+                    {/*<Button className={"Button"}  variant={"outlined"} onClick={() => setTheme(
                     (prevTheme) => (prevTheme === "dark" ? "light" : "dark")
                 )}>
                     Сменить тему
                 </Button>*/}
-                <ul>
-                    <li>
-                        <NavLink to="/" style={ toggleLinkStyle }>Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/chat" style={ toggleLinkStyle }>Chat</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/profile" style={ toggleLinkStyle }>Profile</NavLink>
-                    </li>
-                </ul>
-                <div className="App">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/chat" element={<ChatList chats={chats} addChat={addChat} deleteChat={deleteChat} />}>
-                            <Route path=":id" element={<Chat messages={messages} addMessage={addMessage} />} />
-                        </Route>
-                        <Route path="*" element={<h4>404</h4>} />
-                    </Routes>
-                </div>
-            </BrowserRouter>
-        </ThemeContext.Provider>
+                    <ul>
+                        <li>
+                            <NavLink to="/" style={ toggleLinkStyle }>Home</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/chat" style={ toggleLinkStyle }>Chat</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/profile" style={ toggleLinkStyle }>Profile</NavLink>
+                        </li>
+                    </ul>
+                    <div className="App">
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/chat" element={<ChatList chats={chats} addChat={addChat} deleteChat={deleteChat} />}>
+                                <Route path=":id" element={<Chat messages={messages} addMessage={addMessage} />} />
+                            </Route>
+                            <Route path="*" element={<h4>404</h4>} />
+                        </Routes>
+                    </div>
+                </BrowserRouter>
+            </ThemeContext.Provider>
+        </Provider>
     );
 }
 
