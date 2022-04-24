@@ -2,12 +2,12 @@ import {useDispatch, useSelector} from "react-redux";
 // import {Button} from "@mui/material";
 
 import {Form} from "../../components/Form/Form";
-import {toggleCheckbox} from "../../store/profile/actions";
-import { SET_NAME } from "../../store/profile/actions";
+import {setName, toggleCheckbox} from "../../store/profile/actions";
+// import { SET_NAME } from "../../store/profile/actions";
 
 
 export const Profile = () => {
-    const dispatch = useDispatch(); // dispatch - это результат вызова хука useDispatch, этот хук возвращает функцию dispatch
+    const dispatch = useDispatch(); // dispatch - это результат вызова хука useDispatch, который возвращает функцию dispatch
 
     const state = useSelector(state => state);
     // console.log(state);
@@ -17,10 +17,12 @@ export const Profile = () => {
     };
 
     const handleSubmit = (text) => {
-        dispatch({
+        /*dispatch({
             type: SET_NAME,
             payload: text,
-        });
+        });*/
+        // для упрощения воспользуемся "фабрикой экшенов"
+        dispatch(setName(text));
     };
 
     return (
@@ -30,7 +32,7 @@ export const Profile = () => {
                 {/*<Button variant={"contained"} onClick={handleClick}>Change show name</Button>*/}
                 <div>
                     <input type="checkbox" id="checkbox" onClick={handleClick}></input>
-                    <label htmlFor="checkbox">hide name</label>
+                    <label htmlFor="checkbox">show name</label>
                 </div>
                 {state.showName && <span>{state.name}</span>}
                 <Form onSubmit={handleSubmit} />
