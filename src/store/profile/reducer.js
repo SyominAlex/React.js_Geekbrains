@@ -1,5 +1,4 @@
-import { TOGGLE_CHECKBOX } from "./actions";
-import { SET_NAME } from "./actions";
+import { TOGGLE_CHECKBOX, SET_NAME } from "./actions";
 
 const initialState = {
     showName: false,
