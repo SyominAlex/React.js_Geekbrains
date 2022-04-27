@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {BrowserRouter, Route, Routes, NavLink} from "react-router-dom";
 
 import "./App.css";
@@ -8,42 +8,53 @@ import "./components/Example/Example";
 import { Home } from "./screens/Home/Home";
 import { Chat } from "./screens/Chat/Chat";
 import { ChatList } from "./components/ChatList/ChatList";
-import {initialChats} from "./utils/constants";
 import {ThemeContext} from "./utils/ThemeContext";
 import {Profile} from "./screens/Profile/Profile";
 import { addChat, deleteChat } from "./store/chats/actions";
+import {selectChats} from "./store/chats/selectors";
+import {selectMessages} from "./store/messages/selectors";
+import {addMessage} from "./store/messages/actions";
 
-const initMessages = initialChats.reduce((acc, chat) => {
+/*const initMessages = initialChats.reduce((acc, chat) => {
     acc[chat.id] = [];
     return acc;
-}, {});
+}, {});*/
 
 function App() {
     // const [chats, setChats] = useState(initialChats); // не будем хранить их в стейте, а будем получать из стора
-    const chats = useSelector(state => state.chats);
+    const chats = useSelector(selectChats, shallowEqual);
+    const messages = useSelector(selectMessages);
+    /* в такой записи оптимизация будет менее эффективна, чем в случае с профилем,
+    т.к. в профиле из селекторов возвращаем примитивы, а в случае с чатами всё время возвращаем новый объект.
+    Создатели редакса в курсе проблемы, поэтому дали нам возможность оптимизировать, useSelector имеет второй аргумент -
+    функцию сравнения: если аргументы не равны, пытается обновить.
+    - если используем в качестве селектора именованную константную функцию, где это возможно
+    - если возвращаем не примитив, стараемся использовать функцию сравнения shallowEqual
+    - прежде чем оптимизировать - делать замеры */
     const dispatch = useDispatch();
-    const [messages, setMessages] = useState(initMessages);
+    // const [messages, setMessages] = useState(initMessages);
     const [theme, setTheme] = useState('dark');
 
-    const addMessage = (newMsg, id) => {
-        setMessages({ ...messages, [id]: [...messages[id], newMsg] });
+    const addNewMessage = (newMsg, id) => {
+        // setMessages({ ...messages, [id]: [...messages[id], newMsg] });
+        dispatch(addMessage(newMsg, id));
     };
     
     const addNewChat = (newChat) => {
         // setChats((prevChats) => [...prevChats, newChat]);
         dispatch(addChat(newChat));
-        setMessages((prevMessages) => ({ ...prevMessages, [newChat.id]: [] }));
+        // setMessages((prevMessages) => ({ ...prevMessages, [newChat.id]: [] }));
     };
 
     const removeChat = (id) => {
         // setChats((prevChats) => prevChats.filter((chat) => chat.id !== id));
         dispatch(deleteChat(id));
-        setMessages((prevMessages) => {
-            const newMessages = {...prevMessages};
-            delete newMessages[id];
-
-            return newMessages;
-        });
+        // setMessages((prevMessages) => {
+        //     const newMessages = {...prevMessages};
+        //     delete newMessages[id];
+        //
+        //     return newMessages;
+        // });
     }
 
     const toggleLinkStyle = ({ isActive }) => ({ color: isActive ? "green" : "blue" });
@@ -77,7 +88,7 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/profile" element={<Profile />} />
                             <Route path="/chat" element={<ChatList chats={chats} addChat={addNewChat} deleteChat={removeChat} />}>
-                                <Route path=":id" element={<Chat messages={messages} addMessage={addMessage} />} />
+                                <Route path=":id" element={<Chat messages={messages} addMessage={addNewMessage} />} />
                             </Route>
                             <Route path="*" element={<h4>404</h4>} />
                         </Routes>
