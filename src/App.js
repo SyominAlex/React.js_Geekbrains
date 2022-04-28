@@ -13,7 +13,7 @@ import {Profile} from "./screens/Profile/Profile";
 import { addChat, deleteChat } from "./store/chats/actions";
 import {selectChats} from "./store/chats/selectors";
 import {selectMessages} from "./store/messages/selectors";
-import {addMessage} from "./store/messages/actions";
+import {addMessage, initMessagesForChat} from "./store/messages/actions";
 
 /*const initMessages = initialChats.reduce((acc, chat) => {
     acc[chat.id] = [];
@@ -43,6 +43,7 @@ function App() {
     const addNewChat = (newChat) => {
         // setChats((prevChats) => [...prevChats, newChat]);
         dispatch(addChat(newChat));
+        dispatch(initMessagesForChat(newChat.id));
         // setMessages((prevMessages) => ({ ...prevMessages, [newChat.id]: [] }));
     };
 
@@ -55,7 +56,7 @@ function App() {
         //
         //     return newMessages;
         // });
-    }
+    };
 
     const toggleLinkStyle = ({ isActive }) => ({ color: isActive ? "green" : "blue" });
 
@@ -99,5 +100,3 @@ function App() {
 }
 
 export default App;
-
-// for commit & PR to lesson6 branch
