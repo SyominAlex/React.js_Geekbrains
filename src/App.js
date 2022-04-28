@@ -13,7 +13,7 @@ import {Profile} from "./screens/Profile/Profile";
 import { addChat, deleteChat } from "./store/chats/actions";
 import {selectChats} from "./store/chats/selectors";
 import {selectMessages} from "./store/messages/selectors";
-import {addMessage, initMessagesForChat} from "./store/messages/actions";
+import {addMessage, clearMessages, initMessagesForChat} from "./store/messages/actions";
 
 /*const initMessages = initialChats.reduce((acc, chat) => {
     acc[chat.id] = [];
@@ -50,6 +50,7 @@ function App() {
     const removeChat = (id) => {
         // setChats((prevChats) => prevChats.filter((chat) => chat.id !== id));
         dispatch(deleteChat(id));
+        dispatch(clearMessages(id));
         // setMessages((prevMessages) => {
         //     const newMessages = {...prevMessages};
         //     delete newMessages[id];
