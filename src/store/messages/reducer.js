@@ -1,4 +1,4 @@
-import {ADD_MESSAGE, INIT_MESSAGES_FOR_CHAT} from "./actions";
+import {ADD_MESSAGE, CLEAR_MESSAGES_FOR_CHAT, INIT_MESSAGES_FOR_CHAT} from "./actions";
 // import {ADD_CHAT} from "../chats/actions";
 
 const initialState = {};
@@ -23,6 +23,11 @@ export const messagesReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 [payload]: [], // chatId здесь уже в payload, поэтому получать его не нужно
             };
+        }
+        case CLEAR_MESSAGES_FOR_CHAT: {
+            const copy = { ...state };
+            delete copy[payload];
+            return copy;
         }
         default:
             return state;
