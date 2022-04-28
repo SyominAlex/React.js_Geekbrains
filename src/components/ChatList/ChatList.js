@@ -8,8 +8,15 @@ import {Form} from "../Form/Form";
 import {Button} from "@mui/material";
 import {useContext} from "react";
 import {ThemeContext} from "../../utils/ThemeContext";
+import {useDispatch, useSelector} from "react-redux";
+import {selectChats} from "../../store/chats/selectors";
+import {addChat, deleteChat} from "../../store/chats/actions";
+import {clearMessages, initMessagesForChat} from "../../store/messages/actions";
 
-export const ChatList = ({ chats, addChat, deleteChat }) => {
+export const ChatList = () => { // chats, addChat, deleteChat
+    const chats = useSelector(selectChats);
+    const dispatch = useDispatch();
+
     const { changeTheme } = useContext(ThemeContext);
 
     const handleSubmit = (newChatName) => {
@@ -18,8 +25,15 @@ export const ChatList = ({ chats, addChat, deleteChat }) => {
             id: `chat-${Date.now()}`,
         };
 
-        addChat(newChat);
+        // addChat(newChat);
+        dispatch(addChat(newChat));
+        dispatch(initMessagesForChat(newChat.id));
     }
+
+    const handleRemoveChat = (id) => {
+        dispatch(deleteChat(id));
+        dispatch(clearMessages(id));
+    };
 
     if (!chats) {
         console.log('chatList is null');
@@ -40,7 +54,7 @@ export const ChatList = ({ chats, addChat, deleteChat }) => {
                                 </Link>
                             } />
                         </ListItemButton>
-                        <Button className={"Button"}  variant={"contained"} type="submit" onClick={() => deleteChat(chats.id)}>Удалить</Button>
+                        <Button className={"Button"}  variant={"contained"} type="submit" onClick={() => handleRemoveChat(chats.id)}>Удалить</Button>
                     </ListItem>
                 ))}
                 <Form onSubmit={handleSubmit} />
