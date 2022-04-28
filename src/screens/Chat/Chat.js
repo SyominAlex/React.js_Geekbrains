@@ -4,24 +4,27 @@ import {MessageList} from "../../components/MessageList/MessageList";
 import {Form} from "../../components/Form/Form";
 import {useParams, Navigate/*, useNavigate*/} from "react-router-dom";
 import * as React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {selectMessages} from "../../store/messages/selectors";
+import {addMessage} from "../../store/messages/actions";
 
-export function Chat({messages, addMessage}) {
+export function Chat() { // messages, addMessage
 
-    const {id} = useParams();
-
-    // const navigate = useNavigate(); // передать маршрут роутеру - более декларативный подход
-    // console.log(navigate);
-
+    const { id } = useParams();
+    const messages = useSelector(selectMessages);
+    const dispatch = useDispatch();
     const timeout = useRef(0);
 
     const sendMessage = (text) => {
-        addMessage(
-            {
-                author: AUTHORS.human,
-                text,
-                id: `msg-${Date.now()}`,
-            },
-            id);
+        dispatch(
+            addMessage(
+        {
+                    author: AUTHORS.human,
+                    text,
+                    id: `msg-${Date.now()}`,
+                },
+                id)
+        );
     };
 
     useEffect(() => {
@@ -29,11 +32,13 @@ export function Chat({messages, addMessage}) {
         const lastMessage = messages[id]?.[messages[id]?.length - 1];
         if (lastMessage?.author === AUTHORS.human) {
             timeout.current = setTimeout(() => {
-                addMessage({
-                    author: AUTHORS.robot,
-                    text: "Hello, friend!",
-                    id: `msg-${Date.now()}`,
-                }, id);
+                dispatch(
+                    addMessage({
+                        author: AUTHORS.robot,
+                        text: "Hello, friend!",
+                        id: `msg-${Date.now()}`,
+                    }, id)
+                )
             }, 1500);
         }
 
