@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {useEffect, useRef, useState} from "react";
+=======
+import {useEffect, useRef/*, useState*/} from "react";
+>>>>>>> lesson5
 import {AUTHORS} from "../../utils/constants";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {Form} from "../../components/Form/Form";

@@ -6,8 +6,17 @@ import ListItemText from '@mui/material/ListItemText';
 import { Link, Outlet } from "react-router-dom";
 import {Form} from "../Form/Form";
 import {Button} from "@mui/material";
+<<<<<<< HEAD
 
 export const ChatList = ({ chats, addChat, deleteChat }) => {
+=======
+import {useContext} from "react";
+import {ThemeContext} from "../../utils/ThemeContext";
+
+export const ChatList = ({ chats, addChat, deleteChat }) => {
+    const { changeTheme } = useContext(ThemeContext);
+
+>>>>>>> lesson5
     const handleSubmit = (newChatName) => {
         const newChat = {
             name: newChatName,
@@ -23,6 +32,12 @@ export const ChatList = ({ chats, addChat, deleteChat }) => {
     }
     return (
         <>
+<<<<<<< HEAD
+=======
+            <Button className={"Button"}  variant={"outlined"} onClick={changeTheme}>
+                Сменить тему
+            </Button>
+>>>>>>> lesson5
             <List sx={{ maxWidth: 200, flexGrow: 1 }} >
                 {chats.map((chats) => (
                     <ListItem disablePadding key={chats.id} >
