@@ -11,3 +11,8 @@
 a {
   text-decoration: none;
 }
+
+.profile {
+  display: flex;
+  flex-direction: column;
+}
