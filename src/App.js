@@ -8,7 +8,7 @@ import {Home} from "./screens/Home/Home";
 import {Chat} from "./screens/Chat/Chat";
 import {ChatList} from "./components/ChatList/ChatList";
 import {ThemeContext} from "./utils/ThemeContext";
-import {Profile} from "./screens/Profile/Profile";
+import {ProfileContainer} from "./screens/Profile/ProfileContainer";
 
 function App() {
     const [theme, setTheme] = useState('dark');
@@ -36,7 +36,7 @@ function App() {
                     <div className="App">
                         <Routes>
                             <Route path="/" element={<Home />} />
-                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/profile" element={<ProfileContainer />} />
                             <Route path="/chat" element={<ChatList />}>
                                 <Route path=":id" element={<Chat />} />
                             </Route>
