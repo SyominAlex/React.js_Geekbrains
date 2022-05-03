@@ -10,10 +10,12 @@ export const ProfileContainer = () => {
     const showName = useSelector(selectShowName);
 
     const handleClick = () => {
+        console.log('handleClick')
         dispatch(toggleCheckbox);
     };
 
     const handleSubmit = (text) => {
+        console.log('handleSubmit')
         dispatch(setName(text));
     };
 

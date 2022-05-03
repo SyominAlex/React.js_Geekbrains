@@ -13,7 +13,7 @@ import {selectChats} from "../../store/chats/selectors";
 import {addChat, deleteChat} from "../../store/chats/actions";
 import {clearMessages, initMessagesForChat} from "../../store/messages/actions";
 
-export const ChatList = () => { // chats, addChat, deleteChat
+export const ChatList = () => {
     const chats = useSelector(selectChats);
     const dispatch = useDispatch();
 
@@ -25,7 +25,6 @@ export const ChatList = () => { // chats, addChat, deleteChat
             id: `chat-${Date.now()}`,
         };
 
-        // addChat(newChat);
         dispatch(addChat(newChat));
         dispatch(initMessagesForChat(newChat.id));
     }

@@ -16,11 +16,11 @@ export const Form = ({ onSubmit }) => {
         onSubmit(value);
         setValue(""); // очистка поля ввода после submit
         inputRef.current?.focus(); // решил добавить автофокус на поле
-    }
+    };
 
     const handleChange = (e) => {
         setValue(e.target.value);
-    }
+    };
 
     useEffect(() => {
         inputRef.current?.focus();
@@ -40,4 +40,4 @@ export const Form = ({ onSubmit }) => {
             <Button className={"Button"}  variant={"contained"} type="submit">Отправить</Button>
         </form>
     );
-}
+};
