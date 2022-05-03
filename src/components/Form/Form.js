@@ -9,12 +9,10 @@ export const Form = ({ onSubmit }) => {
 
     const [value, setValue] = useState("");
 
-    // const inputRef = useRef(null);
     const inputRef = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         onSubmit(value);
         setValue(""); // очистка поля ввода после submit
         inputRef.current?.focus(); // решил добавить автофокус на поле
@@ -30,8 +28,6 @@ export const Form = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            {/*<input value={value} onChange={handleChange} type="text" ref={inputRef} required />*/}
-            {/*<input type="submit" />*/}
             <TextField
                 style={{ margin: '20px' }}
                 id="outlined-basic"
@@ -41,7 +37,6 @@ export const Form = ({ onSubmit }) => {
                 onChange={handleChange}
                 inputRef={inputRef}
             />
-            {/*<Button sx={{ color: "green" }}  variant={"contained"} type="submit">Submit</Button>*/}
             <Button className={"Button"}  variant={"contained"} type="submit">Отправить</Button>
         </form>
     );
