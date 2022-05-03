@@ -1,7 +1,7 @@
 import {useMemo} from "react";
 import {AUTHORS} from "../../utils/constants";
 import {MessageList} from "../../components/MessageList/MessageList";
-import {Form} from "../../components/Form/Form";
+import {FormContainer} from "../../components/Form/FormContainer";
 import {useParams, Navigate} from "react-router-dom";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -34,7 +34,7 @@ export function Chat() {
     return (
         <div id="messages">
             <MessageList messages={messages}/>
-            <Form onSubmit={sendMessage}/>
+            <FormContainer onSubmit={sendMessage}/>
         </div>
     );
 }
