@@ -4,7 +4,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import {Link, Outlet} from "react-router-dom";
-import {Form} from "../Form/Form";
+import {FormContainer} from "../Form/FormContainer";
 import {Button} from "@mui/material";
 import {useContext} from "react";
 import {ThemeContext} from "../../utils/ThemeContext";
@@ -56,7 +56,7 @@ export const ChatList = () => {
                         <Button className={"Button"}  variant={"contained"} type="submit" onClick={() => handleRemoveChat(chats.id)}>Удалить</Button>
                     </ListItem>
                 ))}
-                <Form onSubmit={handleSubmit} />
+                <FormContainer onSubmit={handleSubmit} />
             </List>
             <Outlet />
         </>

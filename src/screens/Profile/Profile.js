@@ -1,4 +1,4 @@
-import {Form} from "../../components/Form/Form";
+import {FormContainer} from "../../components/Form/FormContainer";
 
 export const Profile = ({ name, showName, handleClick, handleSubmit }) => (
     <>
@@ -9,7 +9,7 @@ export const Profile = ({ name, showName, handleClick, handleSubmit }) => (
                 <label htmlFor="checkbox">show name</label>
             </div>
             {showName && <span>{name}</span>}
-            <Form onSubmit={handleSubmit} />
+            <FormContainer onSubmit={handleSubmit} />
         </div>
     </>
 );
