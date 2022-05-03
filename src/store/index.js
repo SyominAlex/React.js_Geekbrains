@@ -13,7 +13,7 @@ const persistConfig = {
     storage,
     // blacklist: ["messages", "chats"],
     // whitelist: ["messages", "chats"],
-    // version,
+    // version: ...,
 };
 
 const rootReducer = combineReducers({
