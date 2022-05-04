@@ -10,40 +10,29 @@ export const FormContainer = ({ onSubmit }) => {
 
     const [value, setValue] = useState("");
 
-    // const inputRef = useRef();
+    const inputRef = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(value);
         setValue(""); // очистка поля ввода после submit
-        // inputRef.current?.focus(); // решил добавить автофокус на поле
+        inputRef.current?.focus(); // решил добавить автофокус на поле
     };
 
     const handleChange = (e) => {
         setValue(e.target.value);
     };
 
-    // useEffect(() => {
-    //     inputRef.current?.focus();
-    // }, []);
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
 
-    return ( /*inputRef={inputRef}*/
-        <Form>
+    return (
+        <Form
             value={value}
+            inputRef={inputRef}
             handleChange={handleChange}
-            onSubmit={handleSubmit}
-        </Form>
-        // <form onSubmit={handleSubmit}>
-        //     <TextField
-        //         style={{ margin: '20px' }}
-        //         id="outlined-basic"
-        //         label="Сообщение"
-        //         variant="outlined"
-        //         value={value}
-        //         onChange={handleChange}
-        //         inputRef={inputRef}
-        //     />
-        //     <Button className={"Button"}  variant={"contained"} type="submit">Отправить</Button>
-        // </form>
+            handleSubmit={handleSubmit}
+        />
     );
 };

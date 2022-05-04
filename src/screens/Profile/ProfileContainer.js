@@ -10,7 +10,6 @@ export const ProfileContainer = () => {
     const showName = useSelector(selectShowName);
 
     const handleClick = () => {
-        console.log('handleClick')
         dispatch(toggleCheckbox);
     };
 
@@ -20,13 +19,11 @@ export const ProfileContainer = () => {
     };
 
     return (
-        <>
-            <Profile>
+            <Profile
                 name={name}
                 showName={showName}
                 handleClick={handleClick}
                 handleSubmit={handleSubmit}
-            </Profile>
-        </>
+            />
     );
 };
