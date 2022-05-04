@@ -14,7 +14,6 @@ export const ProfileContainer = () => {
     };
 
     const handleSubmit = (text) => {
-        console.log('handleSubmit')
         dispatch(setName(text));
     };
 
