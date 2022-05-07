@@ -247,6 +247,11 @@ export const ExampleForm = ({ onSubmit, render }) => {
 // console.log(obj.name, obj[name]); // выведет 1 2, т.к. obj[name] === obj.value;
 // console.log(obj.name, obj.value); // аналогично вычисляется значение ключа
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> main
 
 // Пример функции высшего порядка
 const foo = (a, b) => `${a} + ${b}`;
@@ -266,4 +271,9 @@ function addLog(func) {
 const fooWithLog = addLog(foo)/*(100, 500)*/;
 
 fooWithLog(1, 2, 3);
+<<<<<<< HEAD
 fooWithLog(4, 5);
+=======
+fooWithLog(4, 5);
+>>>>>>> lesson5
+>>>>>>> main

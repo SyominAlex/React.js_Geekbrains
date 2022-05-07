@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {combineReducers, createStore, applyMiddleware, compose} from "redux";
 import {persistReducer, persistStore} from "redux-persist";
 
@@ -34,3 +35,12 @@ export const store = createStore(
 );
 
 export const persistor = persistStore(store);
+=======
+import { createStore } from "redux";
+import { profileReducer } from "./profile/reducer";
+
+export const store = createStore(
+    profileReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+>>>>>>> main
