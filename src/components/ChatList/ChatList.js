@@ -3,9 +3,24 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { Link, Outlet } from "react-router-dom";
-import {Form} from "../Form/Form";
+import {Link, Outlet} from "react-router-dom";
+import {FormContainer} from "../Form/FormContainer";
 import {Button} from "@mui/material";
+<<<<<<< HEAD
+import {useContext} from "react";
+import {ThemeContext} from "../../utils/ThemeContext";
+import {useDispatch, useSelector} from "react-redux";
+import {selectChats} from "../../store/chats/selectors";
+import {addChat, deleteChat} from "../../store/chats/actions";
+import {clearMessages, initMessagesForChat} from "../../store/messages/actions";
+
+export const ChatList = () => {
+    const chats = useSelector(selectChats);
+    const dispatch = useDispatch();
+
+    const { changeTheme } = useContext(ThemeContext);
+
+=======
 <<<<<<< HEAD
 
 export const ChatList = ({ chats, addChat, deleteChat }) => {
@@ -17,14 +32,21 @@ export const ChatList = ({ chats, addChat, deleteChat }) => {
     const { changeTheme } = useContext(ThemeContext);
 
 >>>>>>> lesson5
+>>>>>>> main
     const handleSubmit = (newChatName) => {
         const newChat = {
             name: newChatName,
             id: `chat-${Date.now()}`,
         };
 
-        addChat(newChat);
+        dispatch(addChat(newChat));
+        dispatch(initMessagesForChat(newChat.id));
     }
+
+    const handleRemoveChat = (id) => {
+        dispatch(deleteChat(id));
+        dispatch(clearMessages(id));
+    };
 
     if (!chats) {
         console.log('chatList is null');
@@ -33,11 +55,17 @@ export const ChatList = ({ chats, addChat, deleteChat }) => {
     return (
         <>
 <<<<<<< HEAD
+            <Button className={"Button"}  variant={"outlined"} onClick={changeTheme}>
+                Сменить тему
+            </Button>
+=======
+<<<<<<< HEAD
 =======
             <Button className={"Button"}  variant={"outlined"} onClick={changeTheme}>
                 Сменить тему
             </Button>
 >>>>>>> lesson5
+>>>>>>> main
             <List sx={{ maxWidth: 200, flexGrow: 1 }} >
                 {chats.map((chats) => (
                     <ListItem disablePadding key={chats.id} >
@@ -48,10 +76,10 @@ export const ChatList = ({ chats, addChat, deleteChat }) => {
                                 </Link>
                             } />
                         </ListItemButton>
-                        <Button className={"Button"}  variant={"contained"} type="submit" onClick={() => deleteChat(chats.id)}>Удалить</Button>
+                        <Button className={"Button"}  variant={"contained"} type="submit" onClick={() => handleRemoveChat(chats.id)}>Удалить</Button>
                     </ListItem>
                 ))}
-                <Form onSubmit={handleSubmit} />
+                <FormContainer onSubmit={handleSubmit} />
             </List>
             <Outlet />
         </>

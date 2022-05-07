@@ -4,7 +4,7 @@
 
 import {useEffect, useRef, useState} from "react";
 // import { Button, TextField } from "@mui/material";
-// import "./Form.styles.css";
+// import "./FormContainer.styles.css";
 
 /* Пример на функциональных компонентах
 * - нет никаких методов, которые можно вызывать, как у классовых компонентов
@@ -249,6 +249,9 @@ export const ExampleForm = ({ onSubmit, render }) => {
 
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
 
 // Пример функции высшего порядка
 const foo = (a, b) => `${a} + ${b}`;
@@ -268,5 +271,9 @@ function addLog(func) {
 const fooWithLog = addLog(foo)/*(100, 500)*/;
 
 fooWithLog(1, 2, 3);
+<<<<<<< HEAD
+fooWithLog(4, 5);
+=======
 fooWithLog(4, 5);
 >>>>>>> lesson5
+>>>>>>> main

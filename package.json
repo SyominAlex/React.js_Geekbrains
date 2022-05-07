@@ -1,5 +1,5 @@
 {
-  "name": "syomin-alex-react-app",
+  "name": "Syomin Alex",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,15 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
 <<<<<<< HEAD
+    "react-redux": "^7.2.8",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "5.0.0",
+    "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.1",
+    "sass": "^1.49.9",
+=======
+<<<<<<< HEAD
 =======
     "react-redux": "^8.0.0",
 >>>>>>> lesson5
@@ -20,6 +29,7 @@
     "react-scripts": "5.0.0",
     "react-window": "^1.8.6",
     "redux": "^4.2.0",
+>>>>>>> main
     "web-vitals": "^2.1.4"
   },
   "scripts": {

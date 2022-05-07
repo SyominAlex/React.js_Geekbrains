@@ -23,6 +23,9 @@ Message.propTypes = {
 }
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
 
 const withBlueColor = (Component) => (props) => {
     return <Component {...props} color="blue" />
@@ -40,4 +43,7 @@ const withThemeContext = (Component) => (props) => {
 export const MessageWithBlueColor = withBlueColor(Message);
 export const MessageWithGreenColor = withGreenColor(Message);
 export const MessageWithThemeContext = withThemeContext(Message);
+<<<<<<< HEAD
+=======
 >>>>>>> lesson5
+>>>>>>> main

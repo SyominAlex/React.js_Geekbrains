@@ -12,6 +12,13 @@ a {
   text-decoration: none;
 }
 <<<<<<< HEAD
+
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+=======
+<<<<<<< HEAD
 =======
 
 h3 {
@@ -19,3 +26,4 @@ h3 {
   flex-direction: column;
 }
 >>>>>>> lesson5
+>>>>>>> main
