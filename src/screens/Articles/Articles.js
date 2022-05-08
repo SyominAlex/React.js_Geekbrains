@@ -1,38 +1,30 @@
-import {apiUrl} from "../../utils/constants";
-import {useState} from "react";
+import {FETCH_STATUSES} from "../../utils/constants";
+import {useEffect} from "react";
 import {CircularProgress} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {getArticles} from "../../store/articles/actions";
+import {selectArticles, selectArticlesError, selectArticlesStatus} from "../../store/articles/selectors";
 
 export const Articles = () => {
-    const [articles, setArticles] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const articles = useSelector(selectArticles);
+    const error = useSelector(selectArticlesError);
+    const status = useSelector(selectArticlesStatus);
 
-    const sendRequest = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error(`Response failed with status ${response.status}`);
-            }
-            console.log('response', response);
-
-            const result = await response.json();
-            console.log('result', result);
-            setArticles(result);
-        } catch (e) {
-            console.log(e);
-            setError(e.message);
-        } finally {
-            setLoading(false);
-        }
+    const sendRequest = () => {
+        dispatch(getArticles()); // ToDO сюда можно передать настройки с пагинацией, количеством элементов и т.д.
     };
+
+    useEffect(() => {
+        sendRequest();
+    }, []);
 
     return (
         <>
             <div className="articles">
                 <h3>Articles</h3>
                 <button onClick={sendRequest}>Get</button>
-                {loading && <CircularProgress />}
+                {status === FETCH_STATUSES.REQUEST && <CircularProgress />}
                 {error && <h4>{error}</h4>}
                 <ul>
                     {articles.map((article) => (
