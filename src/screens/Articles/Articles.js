@@ -1,11 +1,15 @@
 import {apiUrl} from "../../utils/constants";
 import {useState} from "react";
+import {CircularProgress} from "@mui/material";
 
 export const Articles = () => {
     const [articles, setArticles] = useState([]);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
     const sendRequest = async () => {
         try {
+            setLoading(true);
             const response = await fetch(apiUrl);
             if (!response.ok) {
                 throw new Error(`Response failed with status ${response.status}`);
@@ -18,6 +22,8 @@ export const Articles = () => {
         } catch (e) {
             console.log(e);
             setError(e.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -26,6 +32,7 @@ export const Articles = () => {
             <div className="articles">
                 <h3>Articles</h3>
                 <button onClick={sendRequest}>Get</button>
+                {loading && <CircularProgress />}
                 {error && <h4>{error}</h4>}
                 <ul>
                     {articles.map((article) => (
