@@ -12,7 +12,7 @@ export const Articles = () => {
     const status = useSelector(selectArticlesStatus);
 
     const sendRequest = () => {
-        dispatch(getArticles()); // ToDO сюда можно передать настройки с пагинацией, количеством элементов и т.д.
+        dispatch(getArticles()); // ToDo сюда можно передать настройки с пагинацией, количеством элементов и т.д.
     };
 
     useEffect(() => {
