@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {combineReducers, createStore, applyMiddleware, compose} from "redux";
 import {persistReducer, persistStore} from "redux-persist";
 
@@ -8,6 +7,7 @@ import thunk from "redux-thunk";
 import {profileReducer} from "./profile/reducer";
 import {chatsReducer} from "./chats/reducer";
 import {messagesReducer} from "./messages/reducer";
+import {articlesReducer} from "./articles/reducer";
 
 const persistConfig = {
     key: "gbMessenger",
@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     chats: chatsReducer,
     messages: messagesReducer,
+    articles: articlesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -35,12 +36,3 @@ export const store = createStore(
 );
 
 export const persistor = persistStore(store);
-=======
-import { createStore } from "redux";
-import { profileReducer } from "./profile/reducer";
-
-export const store = createStore(
-    profileReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
->>>>>>> main

@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 import {useMemo} from "react";
-=======
-<<<<<<< HEAD
-import {useEffect, useRef, useState} from "react";
-=======
-import {useEffect, useRef/*, useState*/} from "react";
->>>>>>> lesson5
->>>>>>> main
 import {AUTHORS} from "../../utils/constants";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {FormContainer} from "../../components/Form/FormContainer";
