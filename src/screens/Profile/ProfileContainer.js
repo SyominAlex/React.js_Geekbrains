@@ -4,7 +4,7 @@ import {setName, toggleCheckbox} from "../../store/profile/actions";
 import {selectName, selectShowName} from "../../store/profile/selectors";
 import {Profile} from "./Profile";
 
-export const ProfileContainer = () => {
+export const ProfileContainer = ({ onLogout }) => {
     const dispatch = useDispatch();
     const name = useSelector(selectName);
     const showName = useSelector(selectShowName);
@@ -21,6 +21,7 @@ export const ProfileContainer = () => {
             <Profile
                 name={name}
                 showName={showName}
+                onLogout={onLogout}
                 handleClick={handleClick}
                 handleSubmit={handleSubmit}
             />
