@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {BrowserRouter, Route, Routes, NavLink} from "react-router-dom";
+import {onAuthStateChanged} from "firebase/auth";
 
 import "./App.css";
 import "./components/Example/Example";
@@ -12,6 +13,7 @@ import {ProfileContainer} from "./screens/Profile/ProfileContainer.js";
 import {Articles} from "./screens/Articles/Articles";
 import {PrivateRoute} from "./components/PrivateRoute/PrivateRoute";
 import {PublicRoute} from "./components/PublicRoute/PublicRoute";
+import { auth } from "./services/firebase";
 
 function App() {
     const [theme, setTheme] = useState('dark');
@@ -24,6 +26,17 @@ function App() {
     const handleLogout = () => {
         setAuthed(false);
     };
+
+    // мы устанавливаем слушателя событий и весь этот useEffect выполняется только на монтировании (только 1 раз)
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                handleLogin();
+            } else {
+                handleLogout();
+            }
+        });
+    }, []);
 
     // в итоге App содержит только тему (для демонстрационных целей) и роутинг
     const toggleLinkStyle = ({ isActive }) => ({ color: isActive ? "green" : "blue" });
