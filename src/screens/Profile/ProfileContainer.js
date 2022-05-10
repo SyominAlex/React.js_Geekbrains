@@ -1,36 +1,27 @@
 import {useEffect, useState} from "react";
-// import {useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 // import {useSelector} from "react-redux";
-import {onValue, set} from "firebase/database";
+import {onValue} from "firebase/database";
 
 import {logOut, userRef} from "../../services/firebase";
-// import {toggleCheckbox} from "../../store/profile/actions";
+import {toggleCheckbox} from "../../store/profile/actions";
 // import {setName} from "../../store/profile/actions";
 // import {selectName, selectShowName} from "../../store/profile/selectors";
 import {Profile} from "./Profile";
 
 export const ProfileContainer = () => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // const name = useSelector(selectName);
     // const showName = useSelector(selectShowName);
     const [name, setName] = useState('');
     const [showName, setShowName] = useState(false);
 
     const handleClick = () => {
-        // dispatch(toggleCheckbox);
-        set(userRef, {
-            name,
-            showName: !showName,
-        });
+        dispatch(toggleCheckbox);
     };
 
     const handleSubmit = (text) => {
-        // dispatch(setName(text)); // меняет данные в сторе
-        // если передать null, объект будет удален в БД
-        set(userRef, {
-            name: text,
-            showName,
-        });
+        dispatch(setName(text));
     };
 
     useEffect(() => {
