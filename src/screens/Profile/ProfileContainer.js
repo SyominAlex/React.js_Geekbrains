@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 // import {useSelector} from "react-redux";
 import {onValue, set} from "firebase/database";
 
-import {logOut, userRef} from "../../services/firebase";
+import {logOut, userNameRef, userShowNameRef} from "../../services/firebase";
 // import {toggleCheckbox} from "../../store/profile/actions";
 // import {setName} from "../../store/profile/actions";
 // import {selectName, selectShowName} from "../../store/profile/selectors";
@@ -18,31 +18,28 @@ export const ProfileContainer = () => {
 
     const handleClick = () => {
         // dispatch(toggleCheckbox);
-        set(userRef, {
-            name,
-            showName: !showName,
-        });
+        set(userShowNameRef, !showName);
     };
 
     const handleSubmit = (text) => {
         // dispatch(setName(text)); // меняет данные в сторе
         // если передать null, объект будет удален в БД
-        set(userRef, {
-            name: text,
-            showName,
-        });
+        set(userNameRef, text);
     };
 
     useEffect(() => {
-        const unsubscribe = onValue(userRef, (snapshot) => {
-            // console.log(snapshot.val());
-            // console.log(snapshot.key);
-            snapshot.forEach((child) => console.log(child.key, child.val()));
-            setName(snapshot.val().name);
-            setShowName(snapshot.val().showName);
+        const unsubscribeName = onValue(userNameRef, (snapshot) => {
+            setName(snapshot.val());
         });
 
-        return unsubscribe;
+        const unsubscribeShowName = onValue(userShowNameRef, (snapshot) => {
+            setShowName(snapshot.val());
+        });
+
+        return () => {
+            unsubscribeName();
+            unsubscribeShowName();
+        };
     }, []);
 
     return (
