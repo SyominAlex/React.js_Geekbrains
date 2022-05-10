@@ -29,13 +29,15 @@ function App() {
 
     // мы устанавливаем слушателя событий и весь этот useEffect выполняется только на монтировании (только 1 раз)
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 handleLogin();
             } else {
                 handleLogout();
             }
         });
+
+        return unsubscribe; // не забывать отписываться от слушателей, чтобы избежать утечки памяти и ошибок!
     }, []);
 
     // в итоге App содержит только тему (для демонстрационных целей) и роутинг
