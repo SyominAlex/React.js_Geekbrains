@@ -40,7 +40,7 @@ export const logOut = async () => {
   await signOut(auth);
 };
 
-export const userRef = ref(db, "user"); // ref - это "живая" ссылка на участок БД
+// export const userRef = ref(db, "user"); // ref - это "живая" ссылка на участок БД
 export const userNameRef = ref(db, "user/name");
 export const userShowNameRef = ref(db, "user/showName");
 export const chatsRef = ref(db, "chats");
