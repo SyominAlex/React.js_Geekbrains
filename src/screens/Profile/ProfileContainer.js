@@ -1,10 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
 
+import {logOut} from "../../services/firebase";
 import {setName, toggleCheckbox} from "../../store/profile/actions";
 import {selectName, selectShowName} from "../../store/profile/selectors";
 import {Profile} from "./Profile";
 
-export const ProfileContainer = ({ onLogout }) => {
+export const ProfileContainer = () => {
     const dispatch = useDispatch();
     const name = useSelector(selectName);
     const showName = useSelector(selectShowName);
@@ -21,7 +22,7 @@ export const ProfileContainer = ({ onLogout }) => {
             <Profile
                 name={name}
                 showName={showName}
-                onLogout={onLogout}
+                onLogout={logOut}
                 handleClick={handleClick}
                 handleSubmit={handleSubmit}
             />

@@ -19,12 +19,14 @@ export const Home = ({ isSignUp }) => {
     };
     return (
         <>
-            <h4>Home page</h4>
-            <LoginForm onSubmit={handleSubmit} />
-            {error && <h5>{error}</h5>}
-            <Link to={isSignUp ? "/" : "/signup"}>
-                {isSignUp ? "to login" : "to signup"}
-            </Link>
+            <div className="profile">
+                <h4>Home page</h4>
+                <Link to={isSignUp ? "/" : "/signup"}>
+                    {isSignUp ? "to login" : "to signup"}
+                </Link>
+                <LoginForm onSubmit={handleSubmit} />
+                {error && <h5>{error}</h5>}
+            </div>
         </>
     );
 };
