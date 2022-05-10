@@ -41,11 +41,11 @@ export const logOut = async () => {
 };
 
 export const userRef = ref(db, "user"); // ref - это "живая" ссылка на участок БД
-// export const userNameRef = ref(db, "user/name");
-// export const userShowNameRef = ref(db, "user/showName");
-// export const chatsRef = ref(db, "chats");
-// export const msgsRef = ref(db, "messages");
-// export const getChatRefById = (id) => ref(db, `chats/${id}`);
-// export const getMsgsRefById = (chatId) => ref(db, `messages/${chatId}`);
-// export const getMsgsListRefById = (chatId) =>
-//   ref(db, `messages/${chatId}/messageList`);
+export const userNameRef = ref(db, "user/name");
+export const userShowNameRef = ref(db, "user/showName");
+export const chatsRef = ref(db, "chats");
+export const msgsRef = ref(db, "messages");
+export const getChatRefById = (id) => ref(db, `chats/${id}`);
+export const getMsgsRefById = (chatId) => ref(db, `messages/${chatId}`);
+export const getMsgsListRefById = (chatId) =>
+  ref(db, `messages/${chatId}/messageList`);
