@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-export const LoginForm = () => {
+export const LoginForm = ({ onSubmit }) => {
     const [login, setLogin] = useState("");
     const [pass, setPass] = useState("");
 
@@ -14,6 +14,9 @@ export const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        onSubmit({ login, pass });
+        setLogin("");
+        setPass("");
     };
 
     return (
