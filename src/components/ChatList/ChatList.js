@@ -1,20 +1,25 @@
 import * as React from 'react';
+import {useContext, useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
+// import {useSelector} from "react-redux";
+import {ThemeContext} from "../../utils/ThemeContext";
+import {Button} from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import {Link, Outlet} from "react-router-dom";
+import {set, remove, onValue} from "firebase/database";
+
 import {FormContainer} from "../Form/FormContainer";
-import {Button} from "@mui/material";
-import {useContext} from "react";
-import {ThemeContext} from "../../utils/ThemeContext";
-import {useDispatch, useSelector} from "react-redux";
-import {selectChats} from "../../store/chats/selectors";
-import {addChat, deleteChat} from "../../store/chats/actions";
+// import {selectChats} from "../../store/chats/selectors";
+// import {addChat, deleteChat} from "../../store/chats/actions";
 import {clearMessages, initMessagesForChat} from "../../store/messages/actions";
+import {chatsRef, getChatRefById} from "../../services/firebase";
 
 export const ChatList = () => {
-    const chats = useSelector(selectChats);
+    const [chats, setChats] = useState();
+    // const chats = useSelector(selectChats);
     const dispatch = useDispatch();
 
     const { changeTheme } = useContext(ThemeContext);
@@ -25,19 +30,32 @@ export const ChatList = () => {
             id: `chat-${Date.now()}`,
         };
 
-        dispatch(addChat(newChat));
+        // dispatch(addChat(newChat));
+        set(getChatRefById(newChat.id), newChat);
         dispatch(initMessagesForChat(newChat.id));
     }
 
     const handleRemoveChat = (id) => {
-        dispatch(deleteChat(id));
+        // dispatch(deleteChat(id));
+        // set(getChatRefById(id), null);
+        remove(getChatRefById(id)); // тоже удаляет из Firebase
         dispatch(clearMessages(id));
     };
+
+    useEffect(() => {
+        const unsubscribe = onValue(chatsRef, (snapshot) => {
+            // chatsRef - ссылка на все чаты, т.к. слушаем изменения всех чатов
+            console.log(snapshot.val());
+            setChats(Object.values(snapshot.val() || {}));
+        });
+        return unsubscribe;
+    }, []);
 
     if (!chats) {
         console.log('chatList is null');
         return null;
     }
+
     return (
         <>
             <Button className={"Button"}  variant={"outlined"} onClick={changeTheme}>
