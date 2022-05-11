@@ -49,3 +49,8 @@ export const getChatRefById = (id) => ref(db, `chats/${id}`);
 export const getMsgsRefById = (chatId) => ref(db, `messages/${chatId}`);
 export const getMsgsListRefById = (chatId) =>
   ref(db, `messages/${chatId}/messageList`);
+
+/*let messages = {
+  empty: Boolean,
+  messageList: {},
+};*/
