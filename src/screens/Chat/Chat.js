@@ -1,27 +1,17 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-// import {useMemo} from "react";
 import {useParams, Navigate} from "react-router-dom";
-// import {useDispatch} from "react-redux";
-// import {useSelector} from "react-redux";
 import {onValue, push} from "firebase/database";
 
 import {MessageList} from "../../components/MessageList/MessageList";
 import {FormContainer} from "../../components/Form/FormContainer";
-// import {selectMessagesByChatId} from "../../store/messages/selectors";
 import {getMsgsListRefById, getMsgsRefById, auth} from "../../services/firebase";
-// import {AUTHORS} from "../../utils/constants";
-// import {addMessageWithReply} from "../../store/messages/actions";
 
 export function Chat() {
 
     const { id } = useParams();
 
     const [messages, setMessages] = useState([]);
-
-    // const getMessages = useMemo(() => selectMessagesByChatId(id), [id]);
-    // const messages = useSelector(getMessages); // селектор возвращает уже не объект сообщений, а массив
-    // const dispatch = useDispatch();
 
     const sendMessage = (text) => {
         // сообщения будут храниться в messageList в Realtime Database
