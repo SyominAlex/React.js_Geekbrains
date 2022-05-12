@@ -9,8 +9,8 @@ import {onValue, push} from "firebase/database";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {FormContainer} from "../../components/Form/FormContainer";
 // import {selectMessagesByChatId} from "../../store/messages/selectors";
-import {getMsgsListRefById, getMsgsRefById} from "../../services/firebase";
-import {AUTHORS} from "../../utils/constants";
+import {getMsgsListRefById, getMsgsRefById, auth} from "../../services/firebase";
+// import {AUTHORS} from "../../utils/constants";
 // import {addMessageWithReply} from "../../store/messages/actions";
 
 export function Chat() {
@@ -27,7 +27,8 @@ export function Chat() {
         // сообщения будут храниться в messageList в Realtime Database
         // на push Firebase присвоит свой рандомный id (типа -N1tWC5mYuCKO_W4Sg1U) и сохранит как массив внутри messageList
         push(getMsgsListRefById(id), {
-            author: AUTHORS.human,
+            // author: AUTHORS.human,
+            author: auth.currentUser.email,
             text,
             id: `msg-${Date.now()}`,
         });
