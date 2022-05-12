@@ -1,8 +1,5 @@
 import * as React from 'react';
 import {useContext, useEffect, useState} from "react";
-// import {useDispatch} from "react-redux";
-// import {useSelector} from "react-redux";
-import {ThemeContext} from "../../utils/ThemeContext";
 import {Button} from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -11,16 +8,12 @@ import ListItemText from '@mui/material/ListItemText';
 import {Link, Outlet} from "react-router-dom";
 import {set, remove, onValue} from "firebase/database";
 
+import {ThemeContext} from "../../utils/ThemeContext";
 import {FormContainer} from "../Form/FormContainer";
-// import {selectChats} from "../../store/chats/selectors";
-// import {addChat, deleteChat} from "../../store/chats/actions";
-// import {clearMessages, initMessagesForChat} from "../../store/messages/actions";
 import {chatsRef, getChatRefById, getMsgsRefById} from "../../services/firebase";
 
 export const ChatList = () => {
     const [chats, setChats] = useState();
-    // const chats = useSelector(selectChats);
-    // const dispatch = useDispatch();
 
     const { changeTheme } = useContext(ThemeContext);
 
@@ -30,17 +23,12 @@ export const ChatList = () => {
             id: `chat-${Date.now()}`,
         };
 
-        // dispatch(addChat(newChat));
         set(getChatRefById(newChat.id), newChat);
-        // dispatch(initMessagesForChat(newChat.id));
         set(getMsgsRefById(newChat.id), { exists: true });
     }
 
     const handleRemoveChat = (id) => {
-        // dispatch(deleteChat(id));
-        // set(getChatRefById(id), null);
         remove(getChatRefById(id)); // тоже удаляет из Firebase
-        // dispatch(clearMessages(id));
         set(getMsgsRefById(id), null);
     };
 
