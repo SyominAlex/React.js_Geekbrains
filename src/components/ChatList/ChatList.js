@@ -33,7 +33,7 @@ export const ChatList = () => {
         // dispatch(addChat(newChat));
         set(getChatRefById(newChat.id), newChat);
         // dispatch(initMessagesForChat(newChat.id));
-        set(getMsgsRefById(newChat.id), { empty: true });
+        set(getMsgsRefById(newChat.id), { exists: true });
     }
 
     const handleRemoveChat = (id) => {
