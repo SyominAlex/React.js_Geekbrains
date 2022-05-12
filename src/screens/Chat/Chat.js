@@ -1,13 +1,17 @@
-import {useMemo, useState} from "react";
-import {AUTHORS} from "../../utils/constants";
+import * as React from "react";
+import {useEffect, useState} from "react";
+// import {useMemo} from "react";
+import {useParams, Navigate} from "react-router-dom";
+// import {useDispatch} from "react-redux";
+// import {useSelector} from "react-redux";
+import {onValue, push} from "firebase/database";
+
 import {MessageList} from "../../components/MessageList/MessageList";
 import {FormContainer} from "../../components/Form/FormContainer";
-import {useParams, Navigate} from "react-router-dom";
-import * as React from "react";
-import {useDispatch} from "react-redux";
-// import {useSelector} from "react-redux";
-import {addMessageWithReply} from "../../store/messages/actions";
-import {selectMessagesByChatId} from "../../store/messages/selectors";
+// import {selectMessagesByChatId} from "../../store/messages/selectors";
+import {getMsgsListRefById, getMsgsRefById} from "../../services/firebase";
+import {AUTHORS} from "../../utils/constants";
+// import {addMessageWithReply} from "../../store/messages/actions";
 
 export function Chat() {
 
@@ -15,22 +19,43 @@ export function Chat() {
 
     const [messages, setMessages] = useState([]);
 
-    const getMessages = useMemo(() => selectMessagesByChatId(id), [id]);
+    // const getMessages = useMemo(() => selectMessagesByChatId(id), [id]);
     // const messages = useSelector(getMessages); // селектор возвращает уже не объект сообщений, а массив
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const sendMessage = (text) => {
-        dispatch(
-            addMessageWithReply(
-        {
-                    author: AUTHORS.human,
-                    text,
-                    id: `msg-${Date.now()}`,
-                },
-                id
-            )
-        );
+        // сообщения будут храниться в messageList в Realtime Database
+        // на push Firebase присвоит свой рандомный id (типа -N1tWC5mYuCKO_W4Sg1U) и сохранит как массив внутри messageList
+        push(getMsgsListRefById(id), {
+            author: AUTHORS.human,
+            text,
+            id: `msg-${Date.now()}`,
+        });
+        // dispatch(
+        //     addMessageWithReply(
+        // {
+        //             author: AUTHORS.human,
+        //             text,
+        //             id: `msg-${Date.now()}`,
+        //         },
+        //         id
+        //     )
+        // );
     };
+
+    useEffect(() => {
+        const unsubscribe = onValue(getMsgsRefById(id), (snapshot) => {
+            const val = snapshot.val();
+            if (!snapshot.val()?.exists) {
+                setMessages(null);
+            } else {
+                console.log(val?.messageList);
+                setMessages(Object.values(val.messageList || {}));
+            }
+        });
+
+        return unsubscribe;
+    }, [id]);
 
     if (!messages) {
         return <Navigate to="chat" replace/>
