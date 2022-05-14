@@ -19,8 +19,6 @@ export const getArticlesFailure = (error) => ({
 });
 
 export const getArticles = () => async (dispatch) => {
-    // async - не "чистая функция", зависит от того, как выполнился fetch, используются моки, шпионы и стабы
-    // mock - сторонний объект, который полностью имитирует поведение объекта в той части, которая нас интересует в тесте
     try {
         dispatch(getArticlesRequest());
 
