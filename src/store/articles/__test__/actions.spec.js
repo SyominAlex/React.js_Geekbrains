@@ -36,6 +36,7 @@ describe('getArticles', () => {
         const mockDispatch = jest.fn();
 
         await getArticles()(mockDispatch);
-        expect(mockDispatch).toHaveBeenLastCalledWith(getArticlesSuccess(data));
+        expect(mockDispatch).toHaveBeenLastCalledWith(getArticlesSuccess(data)); // right!
+        // expect(mockDispatch).toHaveBeenLastCalledWith(getArticlesSuccess({})); // wrong!
     });
 })
