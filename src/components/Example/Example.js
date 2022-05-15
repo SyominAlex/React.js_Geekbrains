@@ -308,3 +308,7 @@ export const Parent = () => {
 // React.PureComponent для классовых компонентов - аналог memo(), сравнивает пропсы и стейт (в функциональных компонентах нет стандартной возможности сравнить стейт)
 // class MyComponent extends React.PureComponent {}
 
+/* shouldComponentUpdate - метод вызывается перед рендером с предыдущими пропсами и предыдущим стейтом,
+можем определить свою логику сравнения аналогично React.memo().
+* shouldComponentUpdate вернет true, если обновиться нужно.
+PureComponent отличается от обычного Component тем, что реализует shouldComponentUpdate со сравнением объектов по ссылкам, примитивов - по значениям. */
