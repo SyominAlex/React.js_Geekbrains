@@ -1,4 +1,4 @@
-// import React from "react";
+import React, {useCallback} from "react";
 // import {logDOM} from "@testing-library/react";
 // import { useEffect, useState } from "react";
 
@@ -249,21 +249,66 @@ export const ExampleForm = ({ onSubmit, render }) => {
 
 
 // Пример функции высшего порядка
-const foo = (a, b) => `${a} + ${b}`;
+// const foo = (a, b) => `${a} + ${b}`;
 
 // const addLog = (func) => {
 //     console.log('0-0-0-0-0-0');
 //     func();
 // };
 
-function addLog(func) {
-    return function (...args) {
-        console.log('Пример функции высшего порядка', ...args);
-        return func(...args);
-    }
-}
+// function addLog(func) {
+//     return function (...args) {
+//         console.log('Пример функции высшего порядка', ...args);
+//         return func(...args);
+//     }
+// }
+//
+// const fooWithLog = addLog(foo)/*(100, 500)*/;
+//
+// fooWithLog(1, 2, 3);
+// fooWithLog(4, 5);
 
-const fooWithLog = addLog(foo)/*(100, 500)*/;
+// пример оптимизации с использованием Lighthouse
+const Child1 = React.memo( // есть второй аргумент propsAreEqual(prevProps, nextProps) => Boolean, если не равны - компонент будет обновляться
+    () => {
+    console.log('Child1 render');
+    return <h3>HELLO!</h3>;
+});
 
-fooWithLog(1, 2, 3);
-fooWithLog(4, 5);
+const Child2 = React.memo(({ count }) => {
+    console.log('Child2 render');
+    return <div>{count}</div>;
+});
+
+const Child3 = React.memo(({ onClick }) => {
+    console.log('Child3 render');
+    return <button onClick={onClick}>Click</button>;
+});
+
+export const Parent = () => {
+    const [count, setCount] = useState(0);
+    // обновляется стейт родительского компонента и перерендеривает даже то, что от него не зависит (Child1)
+
+    const updateCount = useCallback(() => {
+        // функция setCount гарантирует, что ссылка на эту функцию будет постоянной и ее не надо добавлять в массивы зависимостей
+        // setCount(count + 1);
+        setCount(prevCount => prevCount + 1); // так не зависит ни от чего
+    }, []); // как только в массиве зависимостей что-то поменяется, функция на мемоизированную функцию будет обновлена
+
+    console.log('Parent render');
+    return (
+        <>
+            <Child1 />
+            <Child2 count={count} />
+            <Child3 onClick={updateCount} />
+        </>
+    );
+};
+
+// React.PureComponent для классовых компонентов - аналог memo(), сравнивает пропсы и стейт (в функциональных компонентах нет стандартной возможности сравнить стейт)
+// class MyComponent extends React.PureComponent {}
+
+/* shouldComponentUpdate - метод вызывается перед рендером с предыдущими пропсами и предыдущим стейтом,
+можем определить свою логику сравнения аналогично React.memo().
+* shouldComponentUpdate вернет true, если обновиться нужно.
+PureComponent отличается от обычного Component тем, что реализует shouldComponentUpdate со сравнением объектов по ссылкам, примитивов - по значениям. */

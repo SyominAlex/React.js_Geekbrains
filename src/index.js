@@ -7,13 +7,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {persistor, store} from "./store";
+import {Parent} from "./components/Example/Example";
 
 ReactDOM.render(
-      <Provider store={store}>
+    <Parent />
+      /*<Provider store={store}>
           <PersistGate persistor={persistor}>
             <App />
           </PersistGate>
-      </Provider>,
+      </Provider>*/,
   document.getElementById('root')
 );
 

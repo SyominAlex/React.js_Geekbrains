@@ -1,8 +1,13 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {useSelector} from "react-redux";
 
-import {setName, toggleCheckbox} from "../../store/profile/actions";
+import {logOut} from "../../services/firebase";
+import {setShowName} from "../../store/profile/actions";
+import {setNameFB} from "../../store/profile/actions";
 import {selectName, selectShowName} from "../../store/profile/selectors";
 import {Profile} from "./Profile";
+import {initProfileTrack, stopProfileTrack} from "../../store/profile/actions";
 
 export const ProfileContainer = () => {
     const dispatch = useDispatch();
@@ -10,17 +15,26 @@ export const ProfileContainer = () => {
     const showName = useSelector(selectShowName);
 
     const handleClick = () => {
-        dispatch(toggleCheckbox);
+        dispatch(setShowName(!showName));
     };
 
     const handleSubmit = (text) => {
-        dispatch(setName(text));
+        dispatch(setNameFB(text));
     };
+
+    useEffect(() => {
+        dispatch(initProfileTrack());
+
+        return () => {
+            dispatch(stopProfileTrack());
+        };
+    }, []);
 
     return (
             <Profile
                 name={name}
                 showName={showName}
+                onLogout={logOut}
                 handleClick={handleClick}
                 handleSubmit={handleSubmit}
             />
