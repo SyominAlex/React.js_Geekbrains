@@ -25,6 +25,8 @@ describe('getArticlesReq', () => {
 describe('getArticles', () => {
     it('dispatches getArticleRequest', () => {
         const mockDispatch = jest.fn();
+        fetch.mockResponse(JSON.stringify([])); // с mock тест стал проходить чуть быстрей
+
         getArticles()(mockDispatch);
 
         expect(mockDispatch).toHaveBeenCalledWith(getArticlesRequest());
@@ -39,4 +41,5 @@ describe('getArticles', () => {
         expect(mockDispatch).toHaveBeenLastCalledWith(getArticlesSuccess(data)); // right!
         // expect(mockDispatch).toHaveBeenLastCalledWith(getArticlesSuccess({})); // wrong!
     });
+    // аналогичным образом можно проверить response не ok либо reject + что dispatch вызван с нужным action типа getArticlesSuccess(data)
 })
