@@ -10,12 +10,12 @@ import {persistor, store} from "./store";
 import {Parent} from "./components/Example/Example";
 
 ReactDOM.render(
-    <Parent />
-      /*<Provider store={store}>
+    // <Parent />
+      <Provider store={store}>
           <PersistGate persistor={persistor}>
             <App />
           </PersistGate>
-      </Provider>*/,
+      </Provider>,
   document.getElementById('root')
 );
 

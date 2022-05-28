@@ -268,6 +268,7 @@ export const ExampleForm = ({ onSubmit, render }) => {
 // fooWithLog(1, 2, 3);
 // fooWithLog(4, 5);
 
+
 // пример оптимизации с использованием Lighthouse
 const Child1 = React.memo( // есть второй аргумент propsAreEqual(prevProps, nextProps) => Boolean, если не равны - компонент будет обновляться
     () => {
