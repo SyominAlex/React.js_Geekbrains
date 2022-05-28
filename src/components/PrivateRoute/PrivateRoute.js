@@ -1,5 +1,4 @@
-import { Outlet } from "react-router";
-import {Navigate} from "react-router-dom";
+import { Outlet, Navigate } from "react-router";
 
 export const PrivateRoute = ({ authed }) => (
     authed ? <Outlet /> : <Navigate to="/" replace />

@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {BrowserRouter, Route, Routes, NavLink} from "react-router-dom";
+import {onAuthStateChanged} from "firebase/auth";
 
 import "./App.css";
 import "./components/Example/Example";
@@ -10,9 +11,35 @@ import {ChatList} from "./components/ChatList/ChatList";
 import {ThemeContext} from "./utils/ThemeContext";
 import {ProfileContainer} from "./screens/Profile/ProfileContainer.js";
 import {Articles} from "./screens/Articles/Articles";
+import {PrivateRoute} from "./components/PrivateRoute/PrivateRoute";
+import {PublicRoute} from "./components/PublicRoute/PublicRoute";
+import { auth } from "./services/firebase";
 
 function App() {
     const [theme, setTheme] = useState('dark');
+    const [authed, setAuthed] = useState(false);
+
+    const handleLogin = () => {
+        setAuthed(true);
+    };
+
+    const handleLogout = () => {
+        setAuthed(false);
+    };
+
+    // мы устанавливаем слушателя событий и весь этот useEffect выполняется только на монтировании (только 1 раз)
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                handleLogin();
+            } else {
+                handleLogout();
+            }
+        });
+
+        return unsubscribe; // не забывать отписываться от слушателей, чтобы избежать утечки памяти и ошибок!
+    }, []);
+
     // в итоге App содержит только тему (для демонстрационных целей) и роутинг
     const toggleLinkStyle = ({ isActive }) => ({ color: isActive ? "green" : "blue" });
 
@@ -39,8 +66,13 @@ function App() {
                     </ul>
                     <div className="App">
                         <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/profile" element={<ProfileContainer />} />
+                            <Route path="/" element={<PublicRoute authed={authed} />}>
+                                <Route path="" element={<Home onAuth={handleLogin} />} />
+                                <Route path="signup" element={<Home onAuth={handleLogin} isSignUp />} />
+                            </Route>
+                            <Route path="/profile" element={<PrivateRoute authed={authed} />}>
+                                <Route path="" element={<ProfileContainer onLogout={handleLogout} />} />
+                            </Route>
                             <Route path="/articles" element={<Articles />} />
                             <Route path="/chat" element={<ChatList />}>
                                 <Route path=":id" element={<Chat />} />
